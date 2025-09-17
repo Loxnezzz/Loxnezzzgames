@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+
+</head>
+<body>
+    <div class="player__inner"><div id="flash-container" class="flash-container iframe" data-fullwidth="0" data-initwidth="100%" data-initheight="500" style="height:520px;"><!-- <iframe id="game-area" allowfullscreen="true" title="Play Tung Sahur Horror" width="100%" height="100%" src="/embed/tung-sahur-horror" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write; web-share; accelerometer; magnetometer; gyroscope; display-capture" name="gameFrame" scrolling="no" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads"></iframe> -->
+    <style>#loader_game_iframe {
+     display: inline-block;
+     width: 15px;
+     aspect-ratio: 1;
+     border-radius: 50%;
+     animation: 1s linear infinite alternate l5
+     }
+
+     @keyframes l5 {
+     0% {
+     box-shadow: 20px 0 #818181, -20px 0 #0002;
+     background: #818181
+     }
+
+     33% {
+     box-shadow: 20px 0 #818181, -20px 0 #0002;
+     background: #0002
+     }
+
+     66% {
+     box-shadow: 20px 0 #0002, -20px 0 #818181;
+     background: #0002
+     }
+
+     100% {
+     box-shadow: 20px 0 #0002, -20px 0 #000;
+     background: #000
+     }
+     }
+
+     .game-preview,
+     .game-preview-bgi,
+     .game_area_frame {
+     top: 0;
+     height: 100%;
+     width: 100%;
+     left: 0
+     }
+
+     .close_mobile_box img,
+     .close_mobile_box svg {
+     width: 24px;
+     height: 24px
+     }
+
+     .is_mobile .game-preview-bgi {
+     filter: unset
+     }
+
+     .close_mobile_box.hide,
+     .is_mobile .game-preview__logo {
+     display: none
+     }
+
+     .game_area_frame {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: #0a0a0a;
+     z-index: 1;
+     overflow: hidden;
+     border: 0;
+     position: fixed;
+     right: 0;
+     bottom: 0
+     }
+
+     .game-preview {
+     position: absolute;
+     overflow: hidden
+     }
+
+     .game-preview-bgi {
+     position: absolute;
+     z-index: 10;
+     background-position: center;
+     background-size: cover;
+     filter: blur(10px)
+     }
+
+     .game-preview__content {
+     position: relative;
+     z-index: 20;
+     display: -webkit-box;
+     display: -ms-flexbox;
+     display: flex;
+     -webkit-box-orient: vertical;
+     -webkit-box-direction: normal;
+     -ms-flex-direction: column;
+     flex-direction: column;
+     -webkit-box-align: center;
+     -ms-flex-align: center;
+     align-items: center;
+     -webkit-box-pack: center;
+     -ms-flex-pack: center;
+     justify-content: center;
+     height: 100%;
+     background-color: rgb(0 0 0 / .6)
+     }
+
+     .play-btn,
+     .play-btn__ctrl {
+     position: relative;
+     height: 50px
+     }
+
+     .game-preview__logo img {
+     border-radius: 8px;
+     -webkit-box-shadow: 0 0 1rem 0 #fff;
+     box-shadow: 0 0 1rem 0 #fff;
+     max-width: 200px
+     }
+
+     .game-preview__title {
+     font-size: 24px;
+     color: #fff;
+     font-weight: 700;
+     margin: 20px auto;
+     background: linear-gradient(90deg, #fff0 0, rgb(0 0 0 / .3) 50%, #fff0);
+     width: 100%;
+     text-align: center;
+     padding: 14px 0;
+     font-family: inherit
+     }
+
+     .play-btn {
+     display: inline-block;
+     vertical-align: top
+     }
+
+     .play-btn__ctrl {
+     overflow: hidden;
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     z-index: 10;
+     box-shadow: 0 0 1rem 0 #fff;
+     background: #ff3814;
+     font-weight: 700;
+     color: #fff;
+     font-size: 22px;
+     padding: 0 32px;
+     border-radius: 16px;
+     border: 0;
+     margin: 0;
+     cursor: pointer;
+     -webkit-overflow-scrolling: touch;
+     transition: box-shadow .15s, background-color .15s, transform .1s, opacity .1s
+     }
+
+     .play-btn__ctrl[disabled=disabled] {
+     opacity: .5
+     }
+
+     .play-btn__ctrl:before {
+     content: "";
+     position: absolute;
+     height: 30px;
+     left: 50%;
+     width: 50px;
+     margin-left: -25px;
+     top: 45px;
+     z-index: 0;
+     border-radius: 10px;
+     background-color: #fff
+     }
+
+     .close_mobile_box {
+     align-items: center;
+     background: #fff;
+     border-radius: 0 16px 16px 0;
+     box-shadow: 0 2px 12px 4px #5d6b8414, 0 23px 9px 0 #5d6b8408, 0 13px 8px 0 #5d6b8417, 0 6px 6px 0 #5d6b8426, 0 1px 3px 0 #5d6b842e;
+     display: flex;
+     height: 46px;
+     padding: 0 7px 0 0;
+     overflow: hidden;
+     display: flex;
+     justify-content: center;
+     position: fixed;
+     top: 24px;
+     left: 0;
+     color: #009cff;
+     z-index: 999;
+     border-top: 2px solid #fff;
+     border-bottom: 2px solid #fff;
+     border-right: 2px solid #fff
+     }
+
+     .game-iframe,
+     .game__video {
+     height: 100%;
+     top: 0;
+     width: 100%
+     }
+
+     .close_mobile_box svg {
+     display: inline-block;
+     vertical-align: middle;
+     fill: currentColor;
+     font-size: 0
+     }
+
+     .game-frame,
+     .game-frame iframe {
+     width: 100%
+     }
+
+     .game-iframe {
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     right: 0
+     }
+
+     .game__preview {
+     position: absolute;
+     inset: 0;
+     cursor: pointer
+     }
+
+     .game__preview::before {
+     content: "";
+     position: absolute;
+     inset: 0;
+     z-index: 2;
+     background: url("/themes/freegames/resources/images/pattern.svg") 0 0/3.125rem 3.125rem rgb(33 26 48 / .5);
+     mix-blend-mode: soft-light
+     }
+
+     .game__video {
+     position: absolute;
+     left: 0;
+     -o-object-fit: cover;
+     object-fit: cover;
+     -o-object-position: bottom center;
+     object-position: bottom center;
+     z-index: 1
+     }
+
+     .frame_fix_mobile {
+     position: fixed !important;
+     left: 0;
+     background: #fff;
+     z-index: 9999;
+     top: 0;
+     bottom: 0;
+     min-height: 100vh;
+     height: 100vh;
+     box-shadow: unset;
+     border-radius: unset;
+     width: 100vw
+     }
+
+     .frame_fix_mobile .game-preview {
+     height: 100% !important;
+     width: 100% !important
+     }</style><script data-cfasync="false">let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+     let _isMobile = (isMobile || isTouchDevice) && window.matchMedia('(max-width: 768px)').matches;</script><script>window.addEventListener("DOMContentLoaded", function() {
+     if (!isMobile || !isTouchDevice) {
+     let conf = document.createElement('script');
+     document.head.appendChild(conf);
+     conf.src = "https://universal.wgplayer.com";
+
+
+     ! function(e, t) {
+     a = e.createElement("script"), m = e.getElementsByTagName("script")[0], a.async = 1, a.src = t, a.fetchPriority = 'high', m.parentNode.insertBefore(a, m)
+     }(document, "https://universal.wgplayer.com/tag/?lh=" + window.location.hostname + "&wp=" + window.location.pathname + "&ws=" + window.location.search);
+     }
+     });</script>
+    <div class="game-preview" style="display: none;"><div class="game__preview" data-game-preview=""><video class="game__video " autoplay="" loop="" muted=""><source src="https://cdn2.1games.io/file/game/tung-sahur-horror/tung-sahur-horror.mp4"></video></div><div class="game-preview__content"><div class="game-preview__logo"><img src="https://images2.1games.io/cache/game/tung-sahur-horror/tung-sahur-horror-m200x130.webp" alt="Play Tung Sahur Horror now!"></div><div class="game-preview__title">Tung Sahur Horror</div><div class="game-preview__run"><div class="play-btn"><button id="show-embed" style="display: inline-block;" data-width="800" data-height="600" data-iframe="https://1games.io/game/tung-sahur-horror/" type="button" class="play-btn__ctrl">Play</button><div id="loader_game_iframe" style="display: none;"></div></div></div></div></div><div id="game-code" class="game-frame" data-id="1" style="display: block;"><iframe class="game-iframe" id="game-area" src="https://1games.io/game/tung-sahur-horror/" width="800" height="600" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write; web-share; accelerometer; magnetometer; gyroscope; display-capture" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads" "="" scrolling="none" frameborder="0" allowfullscreen=""></iframe></div><div id="game-code-mobile" class="game-frame" style="display: none;" data-id="1"></div><script data-cfasync="false">var isNewWindow = false;
+     var hasVideoPreview = true;</script><script data-cfasync="false">console.log("load is_preroll_load");
+     if (!isMobile || !isTouchDevice) {
+     console.log("load desk");
+
+     // Set a flag to track if SDK is ready
+     let sdkReady = false;
+
+     // Set a 5-second timeout as fallback
+     const sdkTimeout = setTimeout(() => {
+     if (!sdkReady) {
+     console.warn("wgSdkReady not fired within 5 seconds, proceeding anyway");
+     handleSdkNotReady();
+     }
+     }, 5000);
+
+     // Original event listener
+     document.addEventListener('wgSdkReady', e => {
+     sdkReady = true; // Mark as ready
+     clearTimeout(sdkTimeout); // Cancel the fallback timeout
+     handleSdkReady();
+     });
+
+     function handleSdkReady() {
+     let prerollButton = document.querySelector("#show-embed");
+     let loading_iframe = document.querySelector("#loader_game_iframe");
+     prerollButton.style.display = 'inline-block';
+     loading_iframe.style.display = 'none';
+
+     if (!isNewWindow) {
+     prerollButton.addEventListener('click', e => {
+     window[preroll.config.loaderObjectName].fetchAd(() => {
+     loadGameIframe();
+     });
+     });
+     }
+     }
+
+     function handleSdkNotReady() {
+     let prerollButton = document.querySelector("#show-embed");
+     let loading_iframe = document.querySelector("#loader_game_iframe");
+     prerollButton.style.display = 'inline-block';
+     loading_iframe.style.display = 'none';
+     prerollButton.addEventListener('click', e => {
+     loadGameIframe();
+     });
+     // Optional: Directly load game if SDK fails
+     // loadGameIframe();
+     }
+     } else {
+     console.log("load mobile");
+     loadGameIframe();
+     }
+
+
+     function loadGameIframe() {
+     console.log("🎯 Starting loadGameIframe...");
+
+     // Get the iframe data from the element with id "show-embed"
+     const showEmbed = document.getElementById("show-embed");
+     const link_iframe = showEmbed.getAttribute('data-iframe');
+     const width = showEmbed.getAttribute('data-width');
+     const height = showEmbed.getAttribute('data-height');
+
+     // Construct the iframe HTML string
+     const html = '<iframe class="game-iframe" id="game-area" src="' +
+     link_iframe + '" width="' + width + '" height="' + height + '"' +
+     'allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write; web-share; accelerometer; magnetometer; gyroscope; display-capture"' +
+     'sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-same-origin allow-downloads"' +
+     '" scrolling="none" frameborder="0" allowfullscreen></iframe>';
+
+     if (_isMobile) {
+     // Mobile handling
+     const gameCode = document.getElementById("game-code");
+     if (gameCode) {
+     gameCode.style.display = 'none';
+     }
+     document.body.classList.add("isFullscreen");
+
+     document.querySelectorAll(".game_area_frame").forEach(function(el) {
+     el.classList.add("frame_fix_mobile");
+     });
+     document.querySelectorAll(".close_mobile_box").forEach(function(el) {
+     el.classList.remove("hide");
+     });
+
+     const gameCodeMobile = document.getElementById("game-code-mobile");
+     if (gameCodeMobile) {
+     gameCodeMobile.innerHTML = html;
+     gameCodeMobile.style.display = 'block';
+     console.log("📱 Mobile iframe inserted");
+
+     // Setup monitoring for mobile
+     setupEnhancedIframeMonitoring();
+     }
+
+     document.querySelectorAll(".game-preview").forEach(function(el) {
+     el.style.display = 'none';
+     });
+     } else {
+     // Desktop handling
+     const gameCodeMobile = document.getElementById("game-code-mobile");
+     if (gameCodeMobile) {
+     gameCodeMobile.style.display = 'none';
+     }
+     document.body.classList.remove("isFullscreen");
+
+     document.querySelectorAll(".game_area_frame").forEach(function(el) {
+     el.classList.remove("frame_fix_mobile");
+     });
+     document.querySelectorAll(".close_mobile_box").forEach(function(el) {
+     el.classList.add("hide");
+     });
+
+     const gameCode = document.getElementById("game-code");
+     if (gameCode) {
+     gameCode.innerHTML = html;
+     gameCode.style.display = 'block';
+     console.log("🖥️ Desktop iframe inserted");
+
+     // Setup monitoring for desktop
+     setupEnhancedIframeMonitoring();
+     }
+
+     document.querySelectorAll(".game-preview").forEach(function(el) {
+     el.style.display = 'none';
+     });
+     }
+
+     // Handle mobile navigation
+     const mobileNav = document.getElementById("mobile-nav");
+     if (mobileNav) {
+     mobileNav.addEventListener('click', function() {
+     document.body.classList.remove("isFullscreen");
+     document.querySelectorAll(".game_area_frame").forEach(function(el) {
+     el.classList.remove("frame_fix_mobile");
+     });
+     document.querySelectorAll(".close_mobile_box").forEach(function(el) {
+     el.classList.add("hide");
+     });
+     document.querySelectorAll(".game-preview").forEach(function(el) {
+     el.style.display = 'block';
+     });
+     const gameCodeMobile = document.getElementById("game-code-mobile");
+     if (gameCodeMobile) {
+     gameCodeMobile.style.display = 'none';
+     }
+     });
+     }
+     }
+
+     // Enhanced iframe monitoring with detailed logging
+     function setupEnhancedIframeMonitoring() {
+     console.log("🔍 Setting up enhanced iframe monitoring...");
+
+     // Wait for iframe to be added to DOM
+     setTimeout(() => {
+     const gameIframe = document.getElementById("game-area");
+     if (gameIframe) {
+     console.log("✅ Dynamic iframe detected:", gameIframe.src);
+
+     // Global flag to track iframe state
+     window.gameIframeState = {
+     loaded: false,
+     ready: false,
+     src: gameIframe.src
+     };
+
+     // Add load event listener
+     gameIframe.addEventListener('load', function() {
+     console.log('🎯 Dynamic iframe LOAD event fired');
+     console.log(' - Source:', this.src);
+     console.log(' - Dimensions:', this.offsetWidth, 'x', this.offsetHeight);
+
+     window.gameIframeState.loaded = true;
+
+     if (this.src && this.src !== 'about:blank') {
+     window.gameIframeState.src = this.src;
+     }
+
+     // Wait for content to render then mark as ready
+     setTimeout(() => {
+     window.gameIframeState.ready = true;
+     console.log('🚀 Dynamic iframe marked as READY for capture');
+
+     // Dispatch custom event
+     window.dispatchEvent(new CustomEvent('iframeContentReady', {
+     detail: { 
+     iframe: this,
+     src: this.src,
+     timestamp: Date.now()
+     }
+     }));
+     }, 3000); // Wait 3 seconds for content to fully render
+     });
+
+     // Add error event listener
+     gameIframe.addEventListener('error', function() {
+     console.error('❌ Dynamic iframe failed to load');
+     window.gameIframeState.loaded = false;
+     window.gameIframeState.ready = false;
+     });
+
+     // Monitor iframe src changes
+     let lastSrc = gameIframe.src;
+     const srcMonitor = setInterval(() => {
+     if (gameIframe.src !== lastSrc) {
+     console.log('🔄 Iframe src changed:', gameIframe.src);
+     lastSrc = gameIframe.src;
+     window.gameIframeState.src = gameIframe.src;
+     window.gameIframeState.ready = false; // Reset ready state on src change
+
+     // Wait again for new content
+     setTimeout(() => {
+     window.gameIframeState.ready = true;
+     console.log('🔄 Iframe ready after src change');
+     window.dispatchEvent(new CustomEvent('iframeContentReady', {
+     detail: { 
+     iframe: gameIframe,
+     src: gameIframe.src,
+     timestamp: Date.now()
+     }
+     }));
+     }, 3000);
+     }
+     }, 1000);
+
+     // Clear monitor after 60 seconds
+     setTimeout(() => clearInterval(srcMonitor), 60000);
+
+     } else {
+     console.error("❌ Game iframe not found after insertion");
+     }
+     }, 200); // Slightly longer delay to ensure DOM update
+     }</script></div></div>
+</body>
+</html>
+
+
+
+
+
