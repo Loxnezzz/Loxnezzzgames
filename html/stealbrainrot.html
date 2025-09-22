@@ -1,52 +1,39 @@
-<div id="fullscreen-mode" class="game-object has-footer">
-        <div id="gameflare-asdk" style="display: none;">
-<div class="game-splash-screen game-splash-click">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="text-center">
-                <img class="img-thumbnail" src="https://data.gameflare.com/games/11023/w5HPHvkBHXOYQv-400-300.jpg" alt="Steal Brainrot 2 online game">
+<div class="game-box">
+    <div id="fullscreen-mode" class="game-object center-block">
+        <div id="game-container" style="visibility: visible;">
+            
 
-                <button class="btn btn-lg btn-danger play-button">Play Game</button>
-
-                <div class="title">
-                    Steal Brainrot 2 Online
-                </div>
-
-            </div>
+            <iframe id="iframe-in-game" src="https://www.gameflare.com/embed/steal-brainrot-2/" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="900" height="635" allow="autoplay; fullscreen" allowfullscreen="" onload="iframeInGameLoaded(10)"></iframe>
         </div>
     </div>
-</div>
 
-<style>
-    .game-splash-screen:before {
-        background-image: url(https://data.gameflare.com/games/11023/w5HPHvkBHXOYQv-400-300.jpg);
-    }
-</style>
-<div id="cpmstar-container" class="">
-    <div class="foreground" style="opacity: 0; display: none;"></div>
-
-    <div class="background">
-        <div class="middle">
-            <div class="body" style="max-width: 468px;">
-                <div class="timer">
-                    Ad will close in 0:<span class="show-time">00</span>
-
-                    <span class="skip-preload">×</span>
-                </div>
-
-                <div class="overlay" data-width="860" data-height="595" data-url="https://www.gameflare.com/common/promotions/cpmstar/?pid="><iframe src="https://www.gameflare.com/common/promotions/cpmstar/?pid=47516" marginwidth="0" marginheight="0" frameborder="0" width="468" height="60" scrolling="no"></iframe>
-</div>
+    
+    
+    
+            <div class="game-promo exclude-default-promo">
+            <div class="adsense">
+                <ins class="adsbygoogle show" data-ad-client="ca-pub-6997479010326903" data-ad-slot="8280981252" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done"><iframe id="aswift_0" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;"><iframe id="google_ads_frame0"></iframe></iframe></ins>
             </div>
-        </div>
-    </div>
-</div>
-</div>
 
+            <div class="own-game-promo" oncontextmenu="return false;"></div>
+
+            <script>
+                window.addEventListener('DOMContentLoaded', function() {
+                    checkPromo([
+                        'https://www.gameflare.com/U3WAbEh5VQxOJo/game/o/900/',
+                        'https://www.gameflare.com/U3WAbEh5VQxOJo/game/c/900/'
+                    ], '.own-game-promo');
+
+                    $(document).on('runBackupForDisabledAdsByEU', function() {
+                        checkPromo([
+                            'https://www.gameflare.com/U3WAbEh5VQxOJo/game/o/900/',
+                            'https://www.gameflare.com/U3WAbEh5VQxOJo/game/c/900/'
+                        ], '.own-game-promo');
+                    });
+                });
+            </script>
         
-        <div id="game-container" style="">
-            <div class="direct-field">
-                                    <iframe src="https://playhop.com/dist-app/447574?header=no&amp;utm_source=distrib&amp;utm_medium=gameflare&amp;clid=6950449" marginwidth="0" marginheight="0" frameborder="0" height="600" scrolling="no" width="900" style="width: 100%; height: 100%;" id="iframe-in-import" data-src="https://playhop.com/dist-app/447574?header=no&amp;utm_source=distrib&amp;utm_medium=gameflare&amp;clid=6950449" allow="autoplay; fullscreen" allowfullscreen=""></iframe>
-
-                            </div>
-        </div>
+        
+                    </div>
     </div>
+
