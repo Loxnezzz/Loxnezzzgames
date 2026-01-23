@@ -5,150 +5,1462 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loxnezzz Games</title>
-    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
-   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <body>
-    <nav>
-        <style>
-a:link {
-  color: white;
-  background-color: transparent;
-  text-decoration: none;
-  font-size: 50px;
-  font-family:Montserrat;
-
-
-}
-
-  a:visited {
-            color: white;
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            background-color: #000000;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
 
-a:hover {
-  color: red;
-  background-color: transparent;
-  text-decoration: underline;
-}
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.95) 0%, rgba(0, 0, 0, 0.9) 100%);
+            border-bottom: 2px solid rgba(0, 251, 255, 0.3);
+            color: #00fbff;
+            display: flex;
+            height: 80px;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 251, 255, 0.15);
+        }
 
-a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
-}
+        nav .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
+        nav .logo-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px rgba(0, 251, 255, 0.8));
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-</style>
-        <h1>Loxnezzz Games</h1>
-    </nav>
-    <div class="featured">
-        <h1>Popular:</h1>
-        <a href="tools.html" class="Tools">⚙️</a></p>
-        <div class="column">
-          <a href="games/MonkeyMart/">
-            <img src="images/bg_loading (copy).png">
-            <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-            </div>
-          </a>
-          <a href="games/basketball-stars">
-            <img src="images/basketball.png">
-            <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-            </div>
-          </a>
-        </div>
-        <div class="row">
-          <a href="html/obby.html">
-            <img src="images/obby.png">
-            <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-            </div>
-          </a>
-        </div>
-        <div class="row">
-          <a href="games/retro-bowl">
-            <img src="images/retro-bowl.jpg">
-            <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-            </div>
-            </a>
-        </div>
-        <div class="column">
-          <a href="html/Growa.html">
-            <img src="images/growa.png">
-            <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-            </div>
-          </a>
-          <a href="games/1v1lol">
-            <img src="images/splash.png">
-            <div class="play-button">
-                <i class="fa-solid fa-play"></i>
-            </div>
-          </a>
-        </div>
-        </div>
-    </div>
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
 
+        nav h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00fbff 0%, #00e1ff 50%, #0099ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            letter-spacing: 2px;
+        }
+
+        nav .settings-icon {
+            font-size: 1.8rem;
+            color: #00fbff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(0, 251, 255, 0.1);
+        }
+
+        nav .settings-icon:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: rgba(0, 251, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 251, 255, 0.4);
+        }
+
+        /* Favorites & Recently Played Sections */
+        .special-section {
+            margin: 100px auto 20px;
+            padding: 20px;
+            max-width: 1400px;
+        }
+
+        .special-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #00fbff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .special-section .games-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .special-section .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        /* Featured Section */
+        .featured {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 1vw;
+            margin: 1%;
+            margin-top: 20px;
+        }
+
+        .featured h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 1vw 1vw 0.4vw 1vw;
+            width: 100%;
+            text-align: left;
+            background: linear-gradient(135deg, #ffffff 0%, #00fbff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .featured .column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured a {
+            display: inline-block;
+            position: relative;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .featured img {
+            height: 12.5vw;
+            width: 12.5vw;
+            min-height: 120px;
+            min-width: 120px;
+            border-radius: 1vw;
+            margin: 0.5vw;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .featured img:hover {
+            transform: scale(1.05);
+            filter: brightness(50%);
+            box-shadow: 0 8px 16px rgba(0, 251, 255, 0.3);
+        }
+
+        .featured .row img {
+            height: 26vw;
+            width: 26vw;
+            min-height: 240px;
+            min-width: 240px;
+        }
+
+        .featured .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .featured a:hover .play-button {
+            opacity: 1;
+        }
+
+        .featured .play-button i {
+            font-size: 5vw;
+            text-shadow: 0 0 30px #ffffff, 0 0 60px #00fbff;
+            color: #00fbff;
+        }
+
+        /* Content Section */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2vw 7vw;
+            padding-top: 2vw;
+        }
+
+        .content hr {
+            border: 0;
+            height: 4px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 251, 255), rgba(0, 0, 0, 0));
+            margin: 2vw 0;
+            width: 100%;
+        }
+
+        /* Search Bar */
+        .search {
+            display: flex;
+            user-select: none;
+            margin: 3vw 0 2vw 0;
+            width: 100%;
+            max-width: 600px;
+            justify-content: center;
+        }
+
+        .search input {
+            background-color: #222222;
+            border: 2px solid #00e1ff;
+            border-radius: 1vw 0 0 1vw;
+            color: #00e1ff;
+            font-size: 1.5vw;
+            font-weight: 600;
+            padding: 0.8vw 1.5vw;
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+            flex-grow: 1;
+            transition: all 0.3s;
+        }
+
+        .search input:focus {
+            background-color: #2a2a2a;
+            box-shadow: 0 0 20px rgba(0, 225, 255, 0.3);
+        }
+
+        .search input::placeholder {
+            color: #00e1ff;
+            font-weight: 600;
+            font-size: 1.5vw;
+            opacity: 0.7;
+        }
+
+        .search button {
+            background-color: #00e1ff;
+            border: none;
+            border-radius: 0 1vw 1vw 0;
+            color: #222222;
+            font-size: 1.5vw;
+            font-weight: 600;
+            padding: 0.8vw 1.5vw;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search button:hover {
+            background-color: #00fbff;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 251, 255, 0.5);
+        }
+
+        /* Category Filters */
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0 30px;
+        }
+
+        .category-btn {
+            background: rgba(0, 225, 255, 0.1);
+            border: 2px solid #00e1ff;
+            border-radius: 25px;
+            color: #00e1ff;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .category-btn:hover {
+            background: rgba(0, 225, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 225, 255, 0.3);
+        }
+
+        .category-btn.active {
+            background: #00e1ff;
+            color: #000;
+            box-shadow: 0 5px 20px rgba(0, 225, 255, 0.5);
+        }
+
+        /* Games Grid */
+        #games {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5vw;
+            width: 100%;
+            padding-bottom: 5vw;
+        }
+
+        #games .game-card {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            border-radius: 1vw;
+            transition: transform 0.3s ease;
+        }
+
+        #games img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 1vw;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        #games .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        #games img:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+            box-shadow: 0 8px 16px rgba(0, 251, 255, 0.3);
+        }
+
+        /* Favorite Heart Button */
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .favorite-btn i {
+            color: #fff;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.1);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .favorite-btn.active i {
+            color: #ff0066;
+            transform: scale(1.2);
+        }
+
+        .favorite-btn.active {
+            background: rgba(255, 0, 102, 0.2);
+        }
+
+        /* Category Badge */
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 225, 255, 0.9);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 5;
+            backdrop-filter: blur(5px);
+        }
+
+        /* No Results Message */
+        .no-results {
+            display: none;
+            color: #00fbff;
+            font-size: 2vw;
+            text-align: center;
+            margin: 3vw 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav h1 {
+                font-size: 1.5rem;
+            }
+
+            nav .logo-icon {
+                font-size: 1.8rem;
+            }
+
+            nav .settings-icon {
+                font-size: 1.3rem;
+            }
+
+            .featured h1,
+            .special-section h2 {
+                font-size: 2rem;
+            }
+
+            .search input,
+            .search input::placeholder,
+            .search button {
+                font-size: 3vw;
+            }
+
+            .category-filters {
+                gap: 10px;
+            }
+
+            .category-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+
+            #games {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            #games img {
+                height: 120px;
+            }
+
+            .special-section .games-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-section">
+            <div class="logo-icon">🎮</div>
+            <h1>Loxnezzz Games</h1>
+        </div>
+        <a href="tools.html" class="settings-icon" title="Settings & Tools">
+            <i class="fa-solid fa-gear"></i>
+        </a>
+    </nav>
 
-</body>
-
-    <div class="content">
-
-      <link rel="stylesheet" href="main.css">
-    <hr>
-       <head>
-
-    <div class="search">
-        <input type="text" placeholder="Search..." oninput="">
-        <button><i class="fas fa-search"></i></button>
+    <!-- Favorites Section -->
+    <div class="special-section" id="favoritesSection" style="display: none;">
+        <h2><i class="fa-solid fa-heart" style="color: #ff0066;"></i> My Favorites</h2>
+        <div class="games-container" id="favoritesContainer">
+            <div class="empty-state">No favorites yet! Click the heart on any game to add it here.</div>
+        </div>
     </div>
 
-      <div id="games">
-        <a href="html/deadshot.html"><img src="images/deadshot-io.png" alt="Deadshot"></a>
-        <a href="html/tungtung.html"><img src="images/tungtung.png" alt="tungtung"></a>
-        <a href="games/1v1lol"><img src="images/splash.png" alt="1v1lol"></a>
-        <a href="games/MonkeyMart"><img src="images/bg_loading (copy).png" alt="MonkeyMarloxnezzzgames.loxnezzz.repl.cot"></a>
-        <a href="games/Rocket-League"><img src="images/splash2.png" alt="RocketLeague"></a>
-        <a href="html/Minecraft.html"><img src="images/mc.png" alt="minecraft"></a>
-        <a href="html/stealbrainrot.html"><img src="images/Steala.png" alt="steal a brainrot"></a>
-        <a href="html/Growa.html"><img src="images/growa.png" alt="Grow A Garden"></a>
-        <a href="html/archer.html"><img src="images/arrow.png" alt="arrow"></a>
-        <a href="html/obby.html"><img src="images/obby.png" alt="Obby"></a>
-        <a href="games/basketball-stars"><img src="images/basketball.png" alt="basketball-stars"></a>
-        <a href="html/3dfarmgoat.html"><img src="images/cattle.png" alt="cattle"></a>
-        <a href="games/vex5/"><img src="images/vex5.jpeg" alt="vex 5"></a>
-        <a href="games/vex6/"><img src="images/vex6.jpeg" alt="vex 6"></a>
-        <a href="games/vex7/"><img src="images/vex7.jpeg" alt="vex 7"></a>
-        <a href="games/2048"><img src="images/apple-touch-icon.png" alt="2048"></a>
-        <a href="games/retro-bowl/"><img src="images/retro-bowl.jpg" alt="retrobowl"></a>
-        <a href="html/retrobowlplus.html"><img src="images/retrobowlplus.png" alt="Retro Bowl Plus"></a>
-        <a href="html/royalcl.html"><img src="images/clash.png" alt="Clash Royal"></a>
-        <a href="games/drive-mad/"><img src="images/drive-mad.jpg" alt="drive mad"></a>
-        <a href="games/slope/"><img src="images/slope.jpg" alt="slope"></a>
-        <a href="games/friday-night-funkin--week-6"><img src="images/funkin.png" alt="FridayNightFunkin"></a>
-        <a href="games/bob-the-robber-2/"><img src="images/bob-the-robber-2.png" alt="bob the robber 2"></a>
-        <a href="games/motox3m2/"><img src="images/motox3m2.jpg" alt="moto x3m2"></a>
-        <a href="html/codzombies.html"><img src="images/cod.png" alt="cod zombies"></a>
-        <a href="games/moto-x3m/"><img src="images/moto-x3m.jpg" alt="moto x3m"></a>
-        <a href="games/DogeMiner"><img src="images/favicon.ico" alt="DogeMiner"></a>
-        <a href="games/sm64"><img src="images/mario.png" alt="sm64"></a>
-        <a href="games/zombsroyale"><img src="games/zombsroyale/zombs.png" alt="Zombsroyale"></a>
-        <a href="html/Gta.html"><img src="images/gta.png" alt="GTA"></a>
-        <a href="games/paperio2"><img src="images/icon512.png" alt="paperio2"></a>
-        <a href="games/drift-hunters"><img src="images/drift-hunters.png" alt="drift-hunters"></a>
-        <a href="html/MarioGames.html"><img src="images/mariostuff.png" alt="Mario"></a>
-        <a href="games/jetpack-joyride"><img src="images/splash3.jpg" alt="Jetpack-Joyride"></a>
-        <a href="games/fireboy-and-watergirl"><img src="images/waterdate.png" alt="fireboy-and-watergirl"></a>
+    <!-- Recently Played Section -->
+    <div class="special-section" id="recentSection" style="display: none;">
+        <h2><i class="fa-solid fa-clock-rotate-left"></i> Recently Played</h2>
+        <div class="games-container" id="recentContainer">
+            <div class="empty-state">No recently played games yet!</div>
+        </div>
+    </div>
 
-
+    <!-- Featured Section -->
+    <div class="featured">
+        <h1>🔥 Popular Games</h1>
         
-       <link rel"stylesheet" href="main.css">
-<script src="script.js"></script>
+        <div class="column">
+            <a href="games/MonkeyMart/" data-game="Monkey Mart">
+                <img src="images/bg_loading (copy).png" alt="Monkey Mart">
+                <div class="play-button">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </a>
+            <a href="games/basketball-stars" data-game="Basketball Stars">
+                <img src="images/basketball.png" alt="Basketball Stars">
+                <div class="play-button">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </a>
+        </div>
+
+        <div class="row">
+            <a href="html/obby.html" data-game="Obby">
+                <img src="images/obby.png" alt="Obby">
+                <div class="play-button">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </a>
+        </div>
+
+        <div class="row">
+            <a href="games/retro-bowl" data-game="Retro Bowl">
+                <img src="images/retro-bowl.jpg" alt="Retro Bowl">
+                <div class="play-button">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </a>
+        </div>
+
+        <div class="column">
+            <a href="html/Growa.html" data-game="Grow A Garden">
+                <img src="images/growa.png" alt="Grow A Garden">
+                <div class="play-button">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </a>
+            <a href="games/1v1lol" data-game="1v1 LOL">
+                <img src="images/splash.png" alt="1v1 LOL">
+                <div class="play-button">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <hr>
+
+        <!-- Search Bar -->
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Search for games..." autocomplete="off">
+            <button onclick="document.getElementById('searchInput').focus()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="category-filters">
+            <button class="category-btn active" data-category="all">All Games</button>
+            <button class="category-btn" data-category="sports">🏀 Sports</button>
+            <button class="category-btn" data-category="racing">🏎️ Racing</button>
+            <button class="category-btn" data-category="action">⚔️ Action</button>
+            <button class="category-btn" data-category="puzzle">🧩 Puzzle</button>
+            <button class="category-btn" data-category="arcade">🎮 Arcade</button>
+            <button class="category-btn" data-category="simulation">🌍 Simulation</button>
+        </div>
+
+        <!-- No Results Message -->
+        <div class="no-results" id="noResults">
+            No games found. Try a different search term or category!
+        </div>
+
+        <!-- Games Grid -->
+        <div id="games">
+            <!-- Sports -->
+            <div class="game-card" data-category="sports">
+                <a href="games/basketball-stars" data-game="Basketball Stars">
+                    <span class="category-badge">Sports</span>
+                    <img src="images/basketball.png" alt="Basketball Stars">
+                </a>
+                <button class="favorite-btn" data-game="Basketball Stars">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="sports">
+                <a href="games/retro-bowl/" data-game="Retro Bowl">
+                    <span class="category-badge">Sports</span>
+                    <img src="images/retro-bowl.jpg" alt="Retro Bowl">
+                </a>
+                <button class="favorite-btn" data-game="Retro Bowl">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="sports">
+                <a href="html/retrobowlplus.html" data-game="Retro Bowl Plus">
+                    <span class="category-badge">Sports</span>
+                    <img src="images/retrobowlplus.png" alt="Retro Bowl Plus">
+                </a>
+                <button class="favorite-btn" data-game="Retro Bowl Plus">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Racing -->
+            <div class="game-card" data-category="racing">
+                <a href="games/drive-mad/" data-game="Drive Mad">
+                    <span class="category-badge">Racing</span>
+                    <img src="images/drive-mad.jpg" alt="Drive Mad">
+                </a>
+                <button class="favorite-btn" data-game="Drive Mad">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="racing">
+                <a href="games/moto-x3m/" data-game="Moto X3M">
+                    <span class="category-badge">Racing</span>
+                    <img src="images/moto-x3m.jpg" alt="Moto X3M">
+                </a>
+                <button class="favorite-btn" data-game="Moto X3M">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="racing">
+                <a href="games/motox3m2/" data-game="Moto X3M 2">
+                    <span class="category-badge">Racing</span>
+                    <img src="images/motox3m2.jpg" alt="Moto X3M 2">
+                </a>
+                <button class="favorite-btn" data-game="Moto X3M 2">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="racing">
+                <a href="games/drift-hunters" data-game="Drift Hunters">
+                    <span class="category-badge">Racing</span>
+                    <img src="images/drift-hunters.png" alt="Drift Hunters">
+                </a>
+                <button class="favorite-btn" data-game="Drift Hunters">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="racing">
+                <a href="games/Rocket-League" data-game="Rocket League">
+                    <span class="category-badge">Racing</span>
+                    <img src="images/splash2.png" alt="Rocket League">
+                </a>
+                <button class="favorite-btn" data-game="Rocket League">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Action -->
+            <div class="game-card" data-category="action">
+                <a href="games/1v1lol" data-game="1v1 LOL">
+                    <span class="category-badge">Action</span>
+                    <img src="images/splash.png" alt="1v1 LOL">
+                </a>
+                <button class="favorite-btn" data-game="1v1 LOL">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="games/slope/" data-game="Slope">
+                    <span class="category-badge">Action</span>
+                    <img src="images/slope.jpg" alt="Slope">
+                </a>
+                <button class="favorite-btn" data-game="Slope">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="games/vex5/" data-game="Vex 5">
+                    <span class="category-badge">Action</span>
+                    <img src="images/vex5.jpeg" alt="Vex 5">
+                </a>
+                <button class="favorite-btn" data-game="Vex 5">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="games/vex6/" data-game="Vex 6">
+                    <span class="category-badge">Action</span>
+                    <img src="images/vex6.jpeg" alt="Vex 6">
+                </a>
+                <button class="favorite-btn" data-game="Vex 6">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="games/vex7/" data-game="Vex 7">
+                    <span class="category-badge">Action</span>
+                    <img src="images/vex7.jpeg" alt="Vex 7">
+                </a>
+                <button class="favorite-btn" data-game="Vex 7">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="html/deadshot.html" data-game="Deadshot">
+                    <span class="category-badge">Action</span>
+                    <img src="images/deadshot-io.png" alt="Deadshot">
+                </a>
+                <button class="favorite-btn" data-game="Deadshot">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="html/archer.html" data-game="Archer">
+                    <span class="category-badge">Action</span>
+                    <img src="images/arrow.png" alt="Archer">
+                </a>
+                <button class="favorite-btn" data-game="Archer">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="games/zombsroyale" data-game="Zombs Royale">
+                    <span class="category-badge">Action</span>
+                    <img src="games/zombsroyale/zombs.png" alt="Zombs Royale">
+                </a>
+                <button class="favorite-btn" data-game="Zombs Royale">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="html/codzombies.html" data-game="COD Zombies">
+                    <span class="category-badge">Action</span>
+                    <img src="images/cod.png" alt="COD Zombies">
+                </a>
+                <button class="favorite-btn" data-game="COD Zombies">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="html/obby.html" data-game="Obby">
+                    <span class="category-badge">Action</span>
+                    <img src="images/obby.png" alt="Obby">
+                </a>
+                <button class="favorite-btn" data-game="Obby">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Puzzle -->
+            <div class="game-card" data-category="puzzle">
+                <a href="games/2048" data-game="2048">
+                    <span class="category-badge">Puzzle</span>
+                    <img src="images/apple-touch-icon.png" alt="2048">
+                </a>
+                <button class="favorite-btn" data-game="2048">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="puzzle">
+                <a href="games/paperio2" data-game="Paper.io 2">
+                    <span class="category-badge">Puzzle</span>
+                    <img src="images/icon512.png" alt="Paper.io 2">
+                </a>
+                <button class="favorite-btn" data-game="Paper.io 2">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="puzzle">
+                <a href="games/fireboy-and-watergirl" data-game="Fireboy and Watergirl">
+                    <span class="category-badge">Puzzle</span>
+                    <img src="images/waterdate.png" alt="Fireboy and Watergirl">
+                </a>
+                <button class="favorite-btn" data-game="Fireboy and Watergirl">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="puzzle">
+                <a href="games/bob-the-robber-2/" data-game="Bob the Robber 2">
+                    <span class="category-badge">Puzzle</span>
+                    <img src="images/bob-the-robber-2.png" alt="Bob the Robber 2">
+                </a>
+                <button class="favorite-btn" data-game="Bob the Robber 2">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Arcade -->
+            <div class="game-card" data-category="arcade">
+                <a href="games/MonkeyMart" data-game="Monkey Mart">
+                    <span class="category-badge">Arcade</span>
+                    <img src="images/bg_loading (copy).png" alt="Monkey Mart">
+                </a>
+                <button class="favorite-btn" data-game="Monkey Mart">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="games/jetpack-joyride" data-game="Jetpack Joyride">
+                    <span class="category-badge">Arcade</span>
+                    <img src="images/splash3.jpg" alt="Jetpack Joyride">
+                </a>
+                <button class="favorite-btn" data-game="Jetpack Joyride">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="games/friday-night-funkin--week-6" data-game="Friday Night Funkin">
+                    <span class="category-badge">Arcade</span>
+                    <img src="images/funkin.png" alt="Friday Night Funkin">
+                </a>
+                <button class="favorite-btn" data-game="Friday Night Funkin">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="games/DogeMiner" data-game="Doge Miner">
+                    <span class="category-badge">Arcade</span>
+                    <img src="images/favicon.ico" alt="Doge Miner">
+                </a>
+                <button class="favorite-btn" data-game="Doge Miner">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="html/tungtung.html" data-game="Tung Tung">
+                    <span class="category-badge">Arcade</span>
+                    <img src="images/tungtung.png" alt="Tung Tung">
+                </a>
+                <button class="favorite-btn" data-game="Tung Tung">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="html/stealbrainrot.html" data-game="Steal a Brainrot">
+                    <span class="category-badge">Arcade</span>
+                    <img src="images/Steala.png" alt="Steal a Brainrot">
+                </a>
+                <button class="favorite-btn" data-game="Steal a Brainrot">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Simulation -->
+            <div class="game-card" data-category="simulation">
+                <a href="html/Minecraft.html" data-game="Minecraft">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/mc.png" alt="Minecraft">
+                </a>
+                <button class="favorite-btn" data-game="Minecraft">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/Growa.html" data-game="Grow A Garden">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/growa.png" alt="Grow A Garden">
+                </a>
+                <button class="favorite-btn" data-game="Grow A Garden">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/3dfarmgoat.html" data-game="Farm Goat">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/cattle.png" alt="Farm Goat">
+                </a>
+                <button class="favorite-btn" data-game="Farm Goat">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/Gta.html" data-game="GTA">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/gta.png" alt="GTA">
+                </a>
+                <button class="favorite-btn" data-game="GTA">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="games/sm64" data-game="Super Mario 64">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/mario.png" alt="Super Mario 64">
+                </a>
+                <button class="favorite-btn" data-game="Super Mario 64">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/MarioGames.html" data-game="Mario Games">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/mariostuff.png" alt="Mario Games">
+                </a>
+                <button class="favorite-btn" data-game="Mario Games">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Simulation -->
+            <div class="game-card" data-category="simulation">
+                <a href="html/Minecraft.html" data-game="Minecraft">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/mc.png" alt="Minecraft">
+                </a>
+                <button class="favorite-btn" data-game="Minecraft">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/Growa.html" data-game="Grow A Garden">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/growa.png" alt="Grow A Garden">
+                </a>
+                <button class="favorite-btn" data-game="Grow A Garden">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/3dfarmgoat.html" data-game="Farm Goat">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/cattle.png" alt="Farm Goat">
+                </a>
+                <button class="favorite-btn" data-game="Farm Goat">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/Gta.html" data-game="GTA">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/gta.png" alt="GTA">
+                </a>
+                <button class="favorite-btn" data-game="GTA">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="games/sm64" data-game="Super Mario 64">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/mario.png" alt="Super Mario 64">
+                </a>
+                <button class="favorite-btn" data-game="Super Mario 64">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/MarioGames.html" data-game="Mario Games">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/mariostuff.png" alt="Mario Games">
+                </a>
+                <button class="favorite-btn" data-game="Mario Games">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="html/royalcl.html" data-game="Clash Royal">
+                    <span class="category-badge">Simulation</span>
+                    <img src="images/clash.png" alt="Clash Royal">
+                </a>
+                <button class="favorite-btn" data-game="Clash Royal">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- NEW GAMES FROM CDN -->
+            
+            <!-- Sports -->
+            <div class="game-card" data-category="sports">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clretrobowlcollege.html" target="_blank" data-game="Retro Bowl College">
+                    <span class="category-badge">Sports</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Retro+Bowl+College" alt="Retro Bowl College">
+                </a>
+                <button class="favorite-btn" data-game="Retro Bowl College">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="sports">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clfootballlegends.html" target="_blank" data-game="Football Legends">
+                    <span class="category-badge">Sports</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Football+Legends" alt="Football Legends">
+                </a>
+                <button class="favorite-btn" data-game="Football Legends">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Racing -->
+            <div class="game-card" data-category="racing">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clsnowrider.html" target="_blank" data-game="Snow Rider 3D">
+                    <span class="category-badge">Racing</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Snow+Rider+3D" alt="Snow Rider 3D">
+                </a>
+                <button class="favorite-btn" data-game="Snow Rider 3D">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="racing">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clmotox3mwinter.html" target="_blank" data-game="Moto X3M Winter">
+                    <span class="category-badge">Racing</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=MotoX3M+Winter" alt="Moto X3M Winter">
+                </a>
+                <button class="favorite-btn" data-game="Moto X3M Winter">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="racing">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clmotox3mspookyland.html" target="_blank" data-game="Moto X3M Spooky">
+                    <span class="category-badge">Racing</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=MotoX3M+Spooky" alt="Moto X3M Spooky">
+                </a>
+                <button class="favorite-btn" data-game="Moto X3M Spooky">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Action -->
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clsuperhot.html" target="_blank" data-game="Superhot">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/ff0066/fff?text=SUPERHOT" alt="Superhot">
+                </a>
+                <button class="favorite-btn" data-game="Superhot">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/cltimeshooter2.html" target="_blank" data-game="Time Shooter 2">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Time+Shooter+2" alt="Time Shooter 2">
+                </a>
+                <button class="favorite-btn" data-game="Time Shooter 2">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/cltimeshooter3.html" target="_blank" data-game="Time Shooter 3">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Time+Shooter+3" alt="Time Shooter 3">
+                </a>
+                <button class="favorite-btn" data-game="Time Shooter 3">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clgetawayshootout.html" target="_blank" data-game="Getaway Shootout">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Getaway+Shootout" alt="Getaway Shootout">
+                </a>
+                <button class="favorite-btn" data-game="Getaway Shootout">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clrooftopsnipers.html" target="_blank" data-game="Rooftop Snipers">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Rooftop+Snipers" alt="Rooftop Snipers">
+                </a>
+                <button class="favorite-btn" data-game="Rooftop Snipers">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clclusterrush.html" target="_blank" data-game="Cluster Rush">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Cluster+Rush" alt="Cluster Rush">
+                </a>
+                <button class="favorite-btn" data-game="Cluster Rush">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clstickmanhook.html" target="_blank" data-game="Stickman Hook">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Stickman+Hook" alt="Stickman Hook">
+                </a>
+                <button class="favorite-btn" data-game="Stickman Hook">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Puzzle -->
+            <div class="game-card" data-category="puzzle">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clbloxorz.html" target="_blank" data-game="Bloxorz">
+                    <span class="category-badge">Puzzle</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Bloxorz" alt="Bloxorz">
+                </a>
+                <button class="favorite-btn" data-game="Bloxorz">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="puzzle">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clcuttherope.html" target="_blank" data-game="Cut the Rope">
+                    <span class="category-badge">Puzzle</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Cut+the+Rope" alt="Cut the Rope">
+                </a>
+                <button class="favorite-btn" data-game="Cut the Rope">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="puzzle">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clsuika.html" target="_blank" data-game="Suika Game">
+                    <span class="category-badge">Puzzle</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Suika+Game" alt="Suika Game">
+                </a>
+                <button class="favorite-btn" data-game="Suika Game">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="puzzle">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clworldshardestgame.html" target="_blank" data-game="World's Hardest Game">
+                    <span class="category-badge">Puzzle</span>
+                    <img src="https://via.placeholder.com/180x180/ff0066/fff?text=Hardest+Game" alt="World's Hardest Game">
+                </a>
+                <button class="favorite-btn" data-game="World's Hardest Game">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Arcade -->
+            <div class="game-card" data-category="arcade">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clcookieclicker.html" target="_blank" data-game="Cookie Clicker">
+                    <span class="category-badge">Arcade</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Cookie+Clicker" alt="Cookie Clicker">
+                </a>
+                <button class="favorite-btn" data-game="Cookie Clicker">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/cltemplerun2.html" target="_blank" data-game="Temple Run 2">
+                    <span class="category-badge">Arcade</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Temple+Run+2" alt="Temple Run 2">
+                </a>
+                <button class="favorite-btn" data-game="Temple Run 2">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clcrossyroad.html" target="_blank" data-game="Crossy Road">
+                    <span class="category-badge">Arcade</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Crossy+Road" alt="Crossy Road">
+                </a>
+                <button class="favorite-btn" data-game="Crossy Road">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/cldoodlejump.html" target="_blank" data-game="Doodle Jump">
+                    <span class="category-badge">Arcade</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Doodle+Jump" alt="Doodle Jump">
+                </a>
+                <button class="favorite-btn" data-game="Doodle Jump">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="arcade">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clhappywheels.html" target="_blank" data-game="Happy Wheels">
+                    <span class="category-badge">Arcade</span>
+                    <img src="https://via.placeholder.com/180x180/ff0066/fff?text=Happy+Wheels" alt="Happy Wheels">
+                </a>
+                <button class="favorite-btn" data-game="Happy Wheels">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- Simulation -->
+            <div class="game-card" data-category="simulation">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clbitlife.html" target="_blank" data-game="Bitlife">
+                    <span class="category-badge">Simulation</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Bitlife" alt="Bitlife">
+                </a>
+                <button class="favorite-btn" data-game="Bitlife">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clidlebreakout.html" target="_blank" data-game="Idle Breakout">
+                    <span class="category-badge">Simulation</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Idle+Breakout" alt="Idle Breakout">
+                </a>
+                <button class="favorite-btn" data-game="Idle Breakout">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="simulation">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clgrindcraft.html" target="_blank" data-game="Grindcraft">
+                    <span class="category-badge">Simulation</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Grindcraft" alt="Grindcraft">
+                </a>
+                <button class="favorite-btn" data-game="Grindcraft">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clrun3.html" target="_blank" data-game="Run 3">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Run+3" alt="Run 3">
+                </a>
+                <button class="favorite-btn" data-game="Run 3">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="game-card" data-category="action">
+                <a href="https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile/UGS-Files/clbtd5.html" target="_blank" data-game="Bloons TD 5">
+                    <span class="category-badge">Action</span>
+                    <img src="https://via.placeholder.com/180x180/00e1ff/000?text=Bloons+TD+5" alt="Bloons TD 5">
+                </a>
+                <button class="favorite-btn" data-game="Bloons TD 5">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <!-- ROBLOX - Featured Game -->
+            <div class="game-card" data-category="simulation" style="grid-column: span 2;">
+                <a href="html/roblox.html" data-game="Roblox">
+                    <span class="category-badge">🔥 Featured</span>
+                    <img src="https://images.rbxcdn.com/c69b74f49c69c271c55afb3d9ea01c60" alt="Roblox" style="height: 220px;">
+                </a>
+                <button class="favorite-btn" data-game="Roblox">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Storage keys
+        const FAVORITES_KEY = 'loxnezzz_favorites';
+        const RECENT_KEY = 'loxnezzz_recent';
+
+        // Get data from memory
+        let favorites = [];
+        let recentlyPlayed = [];
+
+        // Load favorites and recent from memory on page load
+        function loadData() {
+            favorites = [];
+            recentlyPlayed = [];
+            updateFavoritesSection();
+            updateRecentSection();
+        }
+
+        // Update favorites section
+        function updateFavoritesSection() {
+            const favSection = document.getElementById('favoritesSection');
+            const favContainer = document.getElementById('favoritesContainer');
+            
+            if (favorites.length === 0) {
+                favSection.style.display = 'none';
+                return;
+            }
+            
+            favSection.style.display = 'block';
+            favContainer.innerHTML = '';
+            
+            favorites.forEach(gameName => {
+                const gameCard = findGameCard(gameName);
+                if (gameCard) {
+                    const clone = createMiniGameCard(gameCard, gameName);
+                    favContainer.appendChild(clone);
+                }
+            });
+        }
+
+        // Update recently played section
+        function updateRecentSection() {
+            const recentSection = document.getElementById('recentSection');
+            const recentContainer = document.getElementById('recentContainer');
+            
+            if (recentlyPlayed.length === 0) {
+                recentSection.style.display = 'none';
+                return;
+            }
+            
+            recentSection.style.display = 'block';
+            recentContainer.innerHTML = '';
+            
+            recentlyPlayed.forEach(gameName => {
+                const gameCard = findGameCard(gameName);
+                if (gameCard) {
+                    const clone = createMiniGameCard(gameCard, gameName);
+                    recentContainer.appendChild(clone);
+                }
+            });
+        }
+
+        // Find game card by name
+        function findGameCard(gameName) {
+            return document.querySelector(`.game-card a[data-game="${gameName}"]`)?.closest('.game-card');
+        }
+
+        // Create mini game card for favorites/recent
+        function createMiniGameCard(gameCard, gameName) {
+            const clone = gameCard.cloneNode(true);
+            const favoriteBtn = clone.querySelector('.favorite-btn');
+            
+            // Update favorite button state
+            if (favorites.includes(gameName)) {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.querySelector('i').className = 'fa-solid fa-heart';
+            }
+            
+            // Re-attach event listener
+            favoriteBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleFavorite(gameName, favoriteBtn);
+            });
+            
+            return clone;
+        }
+
+        // Toggle favorite
+        function toggleFavorite(gameName, btn) {
+            if (favorites.includes(gameName)) {
+                favorites = favorites.filter(name => name !== gameName);
+                btn.classList.remove('active');
+                btn.querySelector('i').className = 'fa-regular fa-heart';
+            } else {
+                favorites.push(gameName);
+                btn.classList.add('active');
+                btn.querySelector('i').className = 'fa-solid fa-heart';
+            }
+            
+            updateAllFavoriteButtons(gameName);
+            updateFavoritesSection();
+        }
+
+        // Update all favorite buttons for a game
+        function updateAllFavoriteButtons(gameName) {
+            document.querySelectorAll(`.favorite-btn[data-game="${gameName}"]`).forEach(btn => {
+                if (favorites.includes(gameName)) {
+                    btn.classList.add('active');
+                    btn.querySelector('i').className = 'fa-solid fa-heart';
+                } else {
+                    btn.classList.remove('active');
+                    btn.querySelector('i').className = 'fa-regular fa-heart';
+                }
+            });
+        }
+
+        // Track recently played
+        function addToRecent(gameName) {
+            recentlyPlayed = recentlyPlayed.filter(name => name !== gameName);
+            recentlyPlayed.unshift(gameName);
+            if (recentlyPlayed.length > 8) {
+                recentlyPlayed = recentlyPlayed.slice(0, 8);
+            }
+            updateRecentSection();
+        }
+
+        // Initialize favorite buttons
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const gameName = btn.getAttribute('data-game');
+                toggleFavorite(gameName, btn);
+            });
+        });
+
+        // Track game clicks for recently played
+        document.querySelectorAll('a[data-game]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const gameName = link.getAttribute('data-game');
+                addToRecent(gameName);
+            });
+        });
+
+        // Category filtering
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const gameCards = document.querySelectorAll('#games .game-card');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        let activeCategory = 'all';
+
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCategory = btn.getAttribute('data-category');
+                filterGames();
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', filterGames);
+
+        function filterGames() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            gameCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const img = card.querySelector('img');
+                const gameName = img.alt.toLowerCase();
+                
+                const matchesCategory = activeCategory === 'all' || category === activeCategory;
+                const matchesSearch = gameName.includes(searchTerm);
+                
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+        }
+
+        // Clear search on Escape
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                filterGames();
+            }
+        });
+
+        // Load data on page load
+        loadData();
+    </script>
+</body>
+</html>
