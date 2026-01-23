@@ -340,17 +340,15 @@
         </div>
         <div class="right-section">
             <select class="game-selector" id="gameSelector">
-                <option value="method1">🎮 Roblox (Method 1 - Now.gg)</option>
-                <option value="method2">🌐 Roblox (Method 2 - Direct)</option>
-                <option value="method3">📱 Roblox (Method 3 - Mobile)</option>
-                <option value="adoptme">Adopt Me</option>
-                <option value="brookhaven">Brookhaven RP</option>
-                <option value="bloxburg">Bloxburg</option>
-                <option value="disaster">Natural Disaster Survival</option>
-                <option value="petx">Pet Simulator X</option>
-                <option value="jailbreak">Jailbreak</option>
-                <option value="phantom">Phantom Forces</option>
-                <option value="dahood">Da Hood</option>
+                <option value="adoptme">🎮 Adopt Me</option>
+                <option value="brookhaven">🏠 Brookhaven RP</option>
+                <option value="bloxburg">🏘️ Bloxburg</option>
+                <option value="disaster">🌪️ Natural Disaster</option>
+                <option value="petx">🐾 Pet Simulator X</option>
+                <option value="jailbreak">🚔 Jailbreak</option>
+                <option value="phantom">🔫 Phantom Forces</option>
+                <option value="dahood">🏙️ Da Hood</option>
+                <option value="main">🌐 Roblox Home</option>
             </select>
             <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
                 <i class="fa-solid fa-expand"></i>
@@ -381,14 +379,14 @@
         <button class="close-info" onclick="closeInfo()">×</button>
         <div class="info-title">
             <i class="fa-solid fa-info-circle"></i>
-            Multiple Methods Available
+            How to Play Roblox
         </div>
         <ul>
-            <li><strong>Method 1:</strong> Now.gg cloud gaming (may be blocked)</li>
-            <li><strong>Method 2:</strong> Direct Roblox website</li>
-            <li><strong>Method 3:</strong> Mobile-optimized version</li>
-            <li>Try different methods if one doesn't work!</li>
-            <li>Press F for fullscreen, ESC to go back</li>
+            <li>Select a game from the dropdown menu</li>
+            <li>You'll need a Roblox account to play</li>
+            <li>Click fullscreen for best experience</li>
+            <li>If blocked, the game opens in a new tab</li>
+            <li>Press F for fullscreen, ESC to exit</li>
         </ul>
     </div>
 
@@ -400,9 +398,6 @@
 
         // Game URLs mapping
         const gameUrls = {
-            method1: 'https://now.gg/play/roblox-corporation/2470/roblox',
-            method2: 'https://www.roblox.com/games',
-            method3: 'https://m.roblox.com',
             adoptme: 'https://www.roblox.com/games/920587237/Adopt-Me',
             brookhaven: 'https://www.roblox.com/games/4924922222/Brookhaven-RP',
             bloxburg: 'https://www.roblox.com/games/2753915549/Bloxburg',
@@ -410,35 +405,56 @@
             petx: 'https://www.roblox.com/games/6284583030/Pet-Simulator-X',
             jailbreak: 'https://www.roblox.com/games/606849621/Jailbreak',
             phantom: 'https://www.roblox.com/games/292439477/Phantom-Forces',
-            dahood: 'https://www.roblox.com/games/2788229376/Da-Hood'
+            dahood: 'https://www.roblox.com/games/2788229376/Da-Hood',
+            main: 'https://www.roblox.com/games'
         };
 
         // Set initial URL
-        gameFrame.src = gameUrls.method1;
+        gameFrame.src = gameUrls.adoptme;
 
-        // Hide loading screen after iframe loads
+        // Hide loading screen after iframe loads or errors
         gameFrame.addEventListener('load', () => {
             setTimeout(() => {
                 loadingScreen.classList.add('hidden');
             }, 1500);
         });
 
-        // Handle iframe errors
+        // Handle iframe errors - open in new tab instead
         gameFrame.addEventListener('error', () => {
-            loadingScreen.querySelector('.loading-text').textContent = 'Failed to load. Try a different method!';
-            loadingScreen.querySelector('.loading-subtext').textContent = 'Use the dropdown to select Method 2 or 3';
+            const currentUrl = gameFrame.src;
+            window.open(currentUrl, '_blank');
+            loadingScreen.querySelector('.loading-text').textContent = 'Opening in new tab...';
+            loadingScreen.querySelector('.loading-subtext').textContent = 'If blocked, Roblox opened in a new window';
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 2000);
         });
 
         // Change game when selector changes
         gameSelector.addEventListener('change', (e) => {
             loadingScreen.classList.remove('hidden');
             const selectedKey = e.target.value;
-            gameFrame.src = gameUrls[selectedKey] || gameUrls.method1;
+            const newUrl = gameUrls[selectedKey];
+            
+            // Try iframe first
+            gameFrame.src = newUrl;
+            
+            // Fallback: if iframe doesn't load in 5 seconds, open in new tab
+            setTimeout(() => {
+                if (!loadingScreen.classList.contains('hidden')) {
+                    window.open(newUrl, '_blank');
+                    loadingScreen.querySelector('.loading-text').textContent = 'Opened in new tab!';
+                    loadingScreen.querySelector('.loading-subtext').textContent = 'Check your browser for the new window';
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                    }, 2000);
+                }
+            }, 5000);
         });
 
         // Back button
         function goBack() {
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
         }
 
         // Fullscreen toggle
