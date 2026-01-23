@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox - Loxnezzz Games</title>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Top Control Bar */
+        .control-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.95) 0%, rgba(0, 0, 0, 0.9) 100%);
+            border-bottom: 2px solid rgba(0, 251, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 251, 255, 0.15);
+        }
+
+        .control-bar .left-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: rgba(0, 225, 255, 0.1);
+            border: 2px solid #00e1ff;
+            border-radius: 12px;
+            color: #00e1ff;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn:hover {
+            background: #00e1ff;
+            color: #000;
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(0, 225, 255, 0.4);
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00fbff 0%, #00e1ff 50%, #0099ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .game-title .roblox-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px rgba(0, 251, 255, 0.8));
+        }
+
+        .control-bar .right-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .game-selector {
+            background: rgba(0, 225, 255, 0.1);
+            border: 2px solid #00e1ff;
+            border-radius: 12px;
+            color: #00e1ff;
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .game-selector:hover {
+            background: rgba(0, 225, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 225, 255, 0.3);
+        }
+
+        .game-selector option {
+            background: #000;
+            color: #00e1ff;
+        }
+
+        .fullscreen-btn {
+            background: rgba(0, 225, 255, 0.1);
+            border: 2px solid #00e1ff;
+            border-radius: 50%;
+            color: #00e1ff;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-btn:hover {
+            background: #00e1ff;
+            color: #000;
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 225, 255, 0.4);
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(0, 251, 255, 0.2);
+            border-top: 8px solid #00fbff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #00fbff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .loading-subtext {
+            color: rgba(0, 251, 255, 0.7);
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* Game Container */
+        .game-container {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background: #000;
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
+        }
+
+        /* Info Panel */
+        .info-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 20, 40, 0.95);
+            border: 2px solid rgba(0, 251, 255, 0.3);
+            border-radius: 15px;
+            padding: 15px 20px;
+            color: #00fbff;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            max-width: 300px;
+            z-index: 1001;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .info-panel .info-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-panel ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-panel li {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-panel li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #00e1ff;
+        }
+
+        .close-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #00fbff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-info:hover {
+            transform: scale(1.2);
+            color: #ff0066;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .control-bar {
+                height: 60px;
+                padding: 0 10px;
+            }
+
+            .game-title {
+                font-size: 1.2rem;
+            }
+
+            .game-title .roblox-icon {
+                font-size: 1.8rem;
+            }
+
+            .back-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .game-selector {
+                font-size: 0.85rem;
+                padding: 8px 10px;
+            }
+
+            .fullscreen-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .game-container {
+                top: 60px;
+                height: calc(100vh - 60px);
+            }
+
+            .loading-screen {
+                top: 60px;
+                height: calc(100vh - 60px);
+            }
+
+            .info-panel {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Control Bar -->
+    <div class="control-bar">
+        <div class="left-section">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Games
+            </button>
+            <div class="game-title">
+                <span class="roblox-icon">🎮</span>
+                Roblox
+            </div>
+        </div>
+        <div class="right-section">
+            <select class="game-selector" id="gameSelector">
+                <option value="method1">🎮 Roblox (Method 1 - Now.gg)</option>
+                <option value="method2">🌐 Roblox (Method 2 - Direct)</option>
+                <option value="method3">📱 Roblox (Method 3 - Mobile)</option>
+                <option value="adoptme">Adopt Me</option>
+                <option value="brookhaven">Brookhaven RP</option>
+                <option value="bloxburg">Bloxburg</option>
+                <option value="disaster">Natural Disaster Survival</option>
+                <option value="petx">Pet Simulator X</option>
+                <option value="jailbreak">Jailbreak</option>
+                <option value="phantom">Phantom Forces</option>
+                <option value="dahood">Da Hood</option>
+            </select>
+            <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">Loading Roblox...</div>
+        <div class="loading-subtext">This may take a few moments</div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <iframe 
+            id="gameFrame"
+            class="game-frame"
+            src="https://now.gg/play/roblox-corporation/2470/roblox"
+            allowfullscreen
+            allow="accelerometer; gyroscope; magnetometer; clipboard-write; microphone; camera; gamepad;">
+        </iframe>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="info-panel" id="infoPanel">
+        <button class="close-info" onclick="closeInfo()">×</button>
+        <div class="info-title">
+            <i class="fa-solid fa-info-circle"></i>
+            Multiple Methods Available
+        </div>
+        <ul>
+            <li><strong>Method 1:</strong> Now.gg cloud gaming (may be blocked)</li>
+            <li><strong>Method 2:</strong> Direct Roblox website</li>
+            <li><strong>Method 3:</strong> Mobile-optimized version</li>
+            <li>Try different methods if one doesn't work!</li>
+            <li>Press F for fullscreen, ESC to go back</li>
+        </ul>
+    </div>
+
+    <script>
+        const gameFrame = document.getElementById('gameFrame');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const gameSelector = document.getElementById('gameSelector');
+        const infoPanel = document.getElementById('infoPanel');
+
+        // Game URLs mapping
+        const gameUrls = {
+            method1: 'https://now.gg/play/roblox-corporation/2470/roblox',
+            method2: 'https://www.roblox.com/games',
+            method3: 'https://m.roblox.com',
+            adoptme: 'https://www.roblox.com/games/920587237/Adopt-Me',
+            brookhaven: 'https://www.roblox.com/games/4924922222/Brookhaven-RP',
+            bloxburg: 'https://www.roblox.com/games/2753915549/Bloxburg',
+            disaster: 'https://www.roblox.com/games/189707/Natural-Disaster-Survival',
+            petx: 'https://www.roblox.com/games/6284583030/Pet-Simulator-X',
+            jailbreak: 'https://www.roblox.com/games/606849621/Jailbreak',
+            phantom: 'https://www.roblox.com/games/292439477/Phantom-Forces',
+            dahood: 'https://www.roblox.com/games/2788229376/Da-Hood'
+        };
+
+        // Set initial URL
+        gameFrame.src = gameUrls.method1;
+
+        // Hide loading screen after iframe loads
+        gameFrame.addEventListener('load', () => {
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 1500);
+        });
+
+        // Handle iframe errors
+        gameFrame.addEventListener('error', () => {
+            loadingScreen.querySelector('.loading-text').textContent = 'Failed to load. Try a different method!';
+            loadingScreen.querySelector('.loading-subtext').textContent = 'Use the dropdown to select Method 2 or 3';
+        });
+
+        // Change game when selector changes
+        gameSelector.addEventListener('change', (e) => {
+            loadingScreen.classList.remove('hidden');
+            const selectedKey = e.target.value;
+            gameFrame.src = gameUrls[selectedKey] || gameUrls.method1;
+        });
+
+        // Back button
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // Fullscreen toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Close info panel
+        function closeInfo() {
+            infoPanel.style.display = 'none';
+        }
+
+        // Auto-hide info panel after 12 seconds
+        setTimeout(() => {
+            if (infoPanel) {
+                infoPanel.style.animation = 'slideInRight 0.5s ease reverse';
+                setTimeout(() => {
+                    infoPanel.style.display = 'none';
+                }, 500);
+            }
+        }, 12000);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // F for fullscreen
+            if (e.key === 'f' || e.key === 'F') {
+                toggleFullscreen();
+            }
+            // ESC to go back
+            if (e.key === 'Escape' && !document.fullscreenElement) {
+                goBack();
+            }
+        });
+    </script>
+</body>
+</html>
