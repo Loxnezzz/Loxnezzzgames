@@ -2,1165 +2,578 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loxnezzz Games</title>
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap">
+    <title>Loxnezzz Games — Play Free Online Games</title>
+    <meta name="description" content="Play the best free online games at Loxnezzz Games. Sports, racing, action, puzzle, arcade and more — no downloads, no signups.">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #03060d;
+            --bg-2: #07101f;
+            --panel: #0b1626;
+            --panel-2: #0f1d33;
+            --border: rgba(0, 225, 255, 0.12);
+            --border-strong: rgba(0, 225, 255, 0.35);
+            --text: #e8f6ff;
+            --muted: #7d8ea3;
+            --brand: #00e1ff;
+            --brand-2: #2b6bff;
+            --brand-glow: 0 0 24px rgba(0, 225, 255, 0.35);
+            --radius: 14px;
         }
 
-        body {
-            background-color: #000000;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; }
+        ::selection { background: var(--brand); color: #001018; }
+
+        /* Animated backdrop */
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background:
+                radial-gradient(900px 600px at 12% -10%, rgba(43,107,255,0.18), transparent 60%),
+                radial-gradient(800px 500px at 95% 0%, rgba(0,225,255,0.12), transparent 60%),
+                linear-gradient(180deg, #03060d 0%, #02040a 100%);
+            z-index: -2;
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image:
+                linear-gradient(rgba(0,225,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,225,255,0.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
+            z-index: -1;
+            opacity: 0.4;
         }
 
         /* Navigation */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            backdrop-filter: blur(20px) saturate(180%);
-            background: linear-gradient(135deg, rgba(0, 20, 40, 0.95) 0%, rgba(0, 0, 0, 0.9) 100%);
-            border-bottom: 2px solid rgba(0, 251, 255, 0.3);
-            color: #00fbff;
-            display: flex;
-            height: 80px;
-            width: 100%;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 4%;
-            z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0, 251, 255, 0.15);
+            position: sticky; top: 0;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 68px;
+            padding: 0 28px;
+            background: rgba(3, 6, 13, 0.75);
+            backdrop-filter: blur(18px) saturate(160%);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
         }
-
-        nav .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        nav .logo-section { display: flex; align-items: center; gap: 12px; }
+        nav .logo-mark {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+            display: grid; place-items: center; color: #001018;
+            font-size: 1.1rem; box-shadow: var(--brand-glow);
         }
-
-        nav .logo-icon {
-            font-size: 2.5rem;
-            filter: drop-shadow(0 0 10px rgba(0, 251, 255, 0.8));
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
         nav h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #00fbff 0%, #00e1ff 50%, #0099ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: none;
-            letter-spacing: 2px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem; font-weight: 700; letter-spacing: 0.5px;
+            color: var(--text);
         }
-
-        nav .settings-icon {
-            font-size: 1.8rem;
-            color: #00fbff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 10px;
-            border-radius: 50%;
-            background: rgba(0, 251, 255, 0.1);
+        nav h1 span { color: var(--brand); }
+        .nav-actions { display: flex; align-items: center; gap: 10px; }
+        .nav-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 9px 16px; border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.02);
+            color: var(--text); font-size: 0.9rem; font-weight: 500;
+            cursor: pointer; transition: all .2s ease;
         }
+        .nav-btn:hover { border-color: var(--border-strong); color: var(--brand); background: rgba(0,225,255,0.06); }
+        .nav-btn i { font-size: 0.95rem; }
 
-        nav .settings-icon:hover {
-            transform: rotate(90deg) scale(1.1);
-            background: rgba(0, 251, 255, 0.2);
-            box-shadow: 0 0 20px rgba(0, 251, 255, 0.4);
+        /* Hero */
+        .hero {
+            max-width: 1400px; margin: 0 auto;
+            padding: 56px 28px 24px;
+            display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
         }
-
-        /* Favorites & Recently Played Sections */
-        .special-section {
-            margin: 100px auto 20px;
-            padding: 20px;
-            max-width: 1400px;
+        .hero .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 12px; border-radius: 999px;
+            background: rgba(0,225,255,0.08);
+            border: 1px solid var(--border-strong);
+            color: var(--brand); font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.5px; text-transform: uppercase;
         }
-
-        .special-section h2 {
-            font-size: 2.5rem;
+        .hero h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 700;
+            line-height: 1.05; letter-spacing: -1px;
+            background: linear-gradient(180deg, #ffffff 0%, #8fb4d8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero h2 em { font-style: normal; background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--muted); max-width: 620px; font-size: 1.02rem; }
+        .hero .brand-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(4.5rem, 14vw, 11rem);
             font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #00fbff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            line-height: 0.95; letter-spacing: -4px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--brand) 45%, var(--brand-2) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 40px rgba(0, 225, 255, 0.45));
+            animation: brandPulse 4s ease-in-out infinite;
         }
-
-        .special-section .games-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 30px;
+        @keyframes brandPulse {
+            0%, 100% { filter: drop-shadow(0 0 40px rgba(0, 225, 255, 0.45)); }
+            50% { filter: drop-shadow(0 0 70px rgba(0, 225, 255, 0.75)); }
         }
-
-        .special-section .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-            font-size: 1.2rem;
+        .nav-icon-btn {
+            width: 42px; height: 42px; border-radius: 12px;
+            display: grid; place-items: center;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.02);
+            color: var(--text); cursor: pointer;
+            transition: all .2s ease;
         }
+        .nav-icon-btn:hover { border-color: var(--border-strong); color: var(--brand); background: rgba(0,225,255,0.08); transform: rotate(45deg); }
 
-        /* Featured Section */
-        .featured {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 1vw;
-            margin: 1%;
-            margin-top: 20px;
-        }
-
-        .featured h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 1vw 1vw 0.4vw 1vw;
-            width: 100%;
-            text-align: left;
-            background: linear-gradient(135deg, #ffffff 0%, #00fbff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .featured .column {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .featured a {
-            display: inline-block;
-            position: relative;
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        .featured img {
-            height: 12.5vw;
-            width: 12.5vw;
-            min-height: 120px;
-            min-width: 120px;
-            border-radius: 1vw;
-            margin: 0.5vw;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        .featured img:hover {
-            transform: scale(1.05);
-            filter: brightness(50%);
-            box-shadow: 0 8px 16px rgba(0, 251, 255, 0.3);
-        }
-
-        .featured .row img {
-            height: 26vw;
-            width: 26vw;
-            min-height: 240px;
-            min-width: 240px;
-        }
-
-        .featured .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .featured a:hover .play-button {
-            opacity: 1;
-        }
-
-        .featured .play-button i {
-            font-size: 5vw;
-            text-shadow: 0 0 30px #ffffff, 0 0 60px #00fbff;
-            color: #00fbff;
-        }
-
-        /* Content Section */
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2vw 7vw;
-            padding-top: 2vw;
-        }
-
-        .content hr {
-            border: 0;
-            height: 4px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 251, 255), rgba(0, 0, 0, 0));
-            margin: 2vw 0;
-            width: 100%;
-        }
-
-        /* Search Bar */
+        /* Search */
         .search {
-            display: flex;
-            user-select: none;
-            margin: 3vw 0 2vw 0;
-            width: 100%;
-            max-width: 600px;
-            justify-content: center;
+            margin-top: 8px; width: 100%; max-width: 680px;
+            display: flex; align-items: center; gap: 10px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 6px 6px 6px 18px;
+            transition: border-color .2s, box-shadow .2s;
         }
-
+        .search:focus-within { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(0,225,255,0.12); }
+        .search i.search-icon { color: var(--muted); font-size: 0.95rem; }
         .search input {
-            background-color: #222222;
-            border: 2px solid #00e1ff;
-            border-radius: 1vw 0 0 1vw;
-            color: #00e1ff;
-            font-size: 1.5vw;
-            font-weight: 600;
-            padding: 0.8vw 1.5vw;
-            font-family: 'Montserrat', sans-serif;
-            outline: none;
-            flex-grow: 1;
-            transition: all 0.3s;
+            flex: 1; background: transparent; border: none; outline: none;
+            color: var(--text); font-family: inherit; font-size: 1rem;
+            padding: 12px 8px;
         }
-
-        .search input:focus {
-            background-color: #2a2a2a;
-            box-shadow: 0 0 20px rgba(0, 225, 255, 0.3);
-        }
-
-        .search input::placeholder {
-            color: #00e1ff;
-            font-weight: 600;
-            font-size: 1.5vw;
-            opacity: 0.7;
-        }
-
+        .search input::placeholder { color: var(--muted); }
         .search button {
-            background-color: #00e1ff;
-            border: none;
-            border-radius: 0 1vw 1vw 0;
-            color: #222222;
-            font-size: 1.5vw;
-            font-weight: 600;
-            padding: 0.8vw 1.5vw;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+            border: none; color: #001018;
+            font-family: inherit; font-weight: 600; font-size: 0.9rem;
+            padding: 10px 18px; border-radius: 10px; cursor: pointer;
+            transition: transform .15s ease, box-shadow .2s ease;
         }
+        .search button:hover { transform: translateY(-1px); box-shadow: var(--brand-glow); }
 
-        .search button:hover {
-            background-color: #00fbff;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 251, 255, 0.5);
+        /* Sections */
+        .section { max-width: 1400px; margin: 0 auto; padding: 28px; }
+        .section-head {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 18px;
         }
+        .section-head h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem; font-weight: 700; letter-spacing: 0.2px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-head h3 i {
+            color: var(--brand); font-size: 1rem;
+            width: 32px; height: 32px; border-radius: 8px;
+            background: rgba(0,225,255,0.08); border: 1px solid var(--border-strong);
+            display: grid; place-items: center;
+        }
+        .section-head .count { color: var(--muted); font-size: 0.85rem; }
 
         /* Category Filters */
         .category-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin: 20px 0 30px;
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin: 0 0 24px;
         }
-
         .category-btn {
-            background: rgba(0, 225, 255, 0.1);
-            border: 2px solid #00e1ff;
-            border-radius: 25px;
-            color: #00e1ff;
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--panel); border: 1px solid var(--border);
+            color: var(--text); padding: 9px 16px;
+            font-family: inherit; font-size: 0.88rem; font-weight: 500;
+            border-radius: 999px; cursor: pointer;
+            transition: all .2s ease;
         }
-
-        .category-btn:hover {
-            background: rgba(0, 225, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 225, 255, 0.3);
-        }
-
+        .category-btn i { color: var(--muted); transition: color .2s ease; }
+        .category-btn:hover { border-color: var(--border-strong); color: var(--brand); }
+        .category-btn:hover i { color: var(--brand); }
         .category-btn.active {
-            background: #00e1ff;
-            color: #000;
-            box-shadow: 0 5px 20px rgba(0, 225, 255, 0.5);
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+            color: #001018; border-color: transparent;
+            box-shadow: var(--brand-glow);
+        }
+        .category-btn.active i { color: #001018; }
+
+        /* Featured (Popular) */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 220px 220px;
+            gap: 14px;
+        }
+        .featured-tile {
+            position: relative; overflow: hidden; border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--panel);
+            cursor: pointer; transition: transform .25s ease, border-color .25s ease;
+        }
+        .featured-tile:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+        .featured-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+        .featured-tile:hover img { transform: scale(1.05); }
+        .featured-tile .ft-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(3,6,13,0.95) 100%);
+            display: flex; align-items: flex-end; padding: 16px;
+        }
+        .featured-tile .ft-meta { color: var(--text); }
+        .featured-tile .ft-meta .tag { font-size: 0.7rem; color: var(--brand); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .featured-tile .ft-meta h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; margin-top: 4px; }
+        .featured-tile .ft-play {
+            position: absolute; top: 14px; right: 14px;
+            width: 38px; height: 38px; border-radius: 50%;
+            background: rgba(0,225,255,0.95); color: #001018;
+            display: grid; place-items: center;
+            opacity: 0; transform: scale(0.8); transition: all .25s ease;
+            box-shadow: var(--brand-glow);
+        }
+        .featured-tile:hover .ft-play { opacity: 1; transform: scale(1); }
+        .ft-big { grid-row: span 2; }
+        @media (max-width: 900px) {
+            .featured-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 180px); }
+            .ft-big { grid-row: span 1; grid-column: span 2; }
+        }
+        @media (max-width: 560px) {
+            .featured-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 150px); }
+            .ft-big { grid-column: span 2; }
         }
 
         /* Games Grid */
         #games {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1.5vw;
-            width: 100%;
-            padding-bottom: 5vw;
+            gap: 16px;
         }
-
-        #games .game-card {
-            position: relative;
-            display: block;
-            overflow: hidden;
-            border-radius: 1vw;
-            transition: transform 0.3s ease;
+        .game-card {
+            position: relative; border-radius: var(--radius);
+            overflow: hidden; background: var(--panel);
+            border: 1px solid var(--border);
+            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
         }
-
-        #games img {
-            height: 180px;
-            width: 100%;
-            object-fit: cover;
-            border-radius: 1vw;
-            cursor: pointer;
-            user-select: none;
-            transition: transform 0.3s ease, filter 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        .game-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-strong);
+            box-shadow: 0 14px 32px -16px rgba(0,225,255,0.4);
         }
-
-        #games .game-card:hover {
-            transform: translateY(-5px);
+        .game-card a { display: block; }
+        .game-card .thumb {
+            position: relative; aspect-ratio: 1 / 1; overflow: hidden;
         }
-
-        #games img:hover {
-            transform: scale(1.1);
-            filter: brightness(1.2);
-            box-shadow: 0 8px 16px rgba(0, 251, 255, 0.3);
+        .game-card img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform .4s ease;
         }
-
-        /* Favorite Heart Button */
+        .game-card:hover img { transform: scale(1.07); }
+        .game-card .thumb::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(3,6,13,0.85) 100%);
+        }
+        .game-card .meta {
+            position: absolute; left: 0; right: 0; bottom: 0;
+            padding: 12px 14px; z-index: 2;
+        }
+        .game-card .meta .name {
+            font-size: 0.92rem; font-weight: 600; color: var(--text);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .game-card .meta .cat {
+            font-size: 0.7rem; color: var(--brand); font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.8px;
+        }
         .favorite-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            position: absolute; top: 10px; right: 10px; z-index: 3;
+            width: 34px; height: 34px; border-radius: 50%;
+            background: rgba(3,6,13,0.7); border: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+            display: grid; place-items: center; cursor: pointer;
+            color: #fff; transition: all .2s ease;
         }
+        .favorite-btn:hover { transform: scale(1.08); border-color: var(--border-strong); }
+        .favorite-btn.active { background: rgba(255, 56, 96, 0.9); border-color: transparent; color: #fff; }
+        .favorite-btn.active i { font-weight: 900; }
 
-        .favorite-btn i {
-            color: #fff;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .favorite-btn:hover {
-            transform: scale(1.1);
-            background: rgba(0, 0, 0, 0.9);
-        }
-
-        .favorite-btn.active i {
-            color: #ff0066;
-            transform: scale(1.2);
-        }
-
-        .favorite-btn.active {
-            background: rgba(255, 0, 102, 0.2);
-        }
-
-        /* Category Badge */
-        .category-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 225, 255, 0.9);
-            color: #000;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            z-index: 5;
-            backdrop-filter: blur(5px);
-        }
-
-        /* No Results Message */
         .no-results {
-            display: none;
-            color: #00fbff;
-            font-size: 2vw;
-            text-align: center;
-            margin: 3vw 0;
-            width: 100%;
+            display: none; text-align: center; padding: 60px 20px;
+            color: var(--muted); font-size: 1rem; grid-column: 1 / -1;
+        }
+        .empty-state {
+            text-align: center; padding: 30px; color: var(--muted); font-size: 0.95rem;
+            border: 1px dashed var(--border); border-radius: var(--radius);
+            grid-column: 1 / -1;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav h1 {
-                font-size: 1.5rem;
-            }
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            margin-top: 40px; padding: 28px;
+            text-align: center; color: var(--muted); font-size: 0.85rem;
+        }
+        footer span { color: var(--brand); }
 
-            nav .logo-icon {
-                font-size: 1.8rem;
-            }
-
-            nav .settings-icon {
-                font-size: 1.3rem;
-            }
-
-            .featured h1,
-            .special-section h2 {
-                font-size: 2rem;
-            }
-
-            .search input,
-            .search input::placeholder,
-            .search button {
-                font-size: 3vw;
-            }
-
-            .category-filters {
-                gap: 10px;
-            }
-
-            .category-btn {
-                padding: 8px 15px;
-                font-size: 0.85rem;
-            }
-
-            #games {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-
-            #games img {
-                height: 120px;
-            }
-
-            .special-section .games-container {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
+        @media (max-width: 640px) {
+            nav { padding: 0 16px; }
+            nav h1 { font-size: 1.1rem; }
+            .hero { padding: 36px 16px 16px; }
+            .section { padding: 20px 16px; }
+            #games { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+            .nav-btn span { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="logo-section">
-            <div class="logo-icon">🎮</div>
-            <h1>Loxnezzz Games</h1>
+            <div class="logo-mark"><i class="fa-solid fa-gamepad"></i></div>
+            <h1>Loxnezzz<span>.</span></h1>
         </div>
-        <a href="tools.html" class="settings-icon" title="Settings & Tools">
-            <i class="fa-solid fa-gear"></i>
-        </a>
+        <div class="nav-actions">
+            <a href="/tools.html" class="nav-icon-btn" aria-label="Tools & Settings" title="Tools & Settings"><i class="fa-solid fa-gear"></i></a>
+        </div>
     </nav>
 
-    <!-- Favorites Section -->
-    <div class="special-section" id="favoritesSection" style="display: none;">
-        <h2><i class="fa-solid fa-heart" style="color: #ff0066;"></i> My Favorites</h2>
-        <div class="games-container" id="favoritesContainer">
-            <div class="empty-state">No favorites yet! Click the heart on any game to add it here.</div>
-        </div>
-    </div>
-
-    <!-- Recently Played Section -->
-    <div class="special-section" id="recentSection" style="display: none;">
-        <h2><i class="fa-solid fa-clock-rotate-left"></i> Recently Played</h2>
-        <div class="games-container" id="recentContainer">
-            <div class="empty-state">No recently played games yet!</div>
-        </div>
-    </div>
-
-    <!-- Featured Section -->
-    <div class="featured">
-        <h1>🔥 Popular Games</h1>
-        
-        <div class="column">
-            <a href="games/MonkeyMart/" data-game="Monkey Mart">
-                <img src="images/bg_loading (copy).png" alt="Monkey Mart">
-                <div class="play-button">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-            </a>
-            <a href="games/basketball-stars" data-game="Basketball Stars">
-                <img src="images/basketball.png" alt="Basketball Stars">
-                <div class="play-button">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-            </a>
-        </div>
-
-        <div class="row">
-            <a href="html/obby.html" data-game="Obby">
-                <img src="images/obby.png" alt="Obby">
-                <div class="play-button">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-            </a>
-        </div>
-
-        <div class="row">
-            <a href="games/retro-bowl" data-game="Retro Bowl">
-                <img src="images/retro-bowl.jpg" alt="Retro Bowl">
-                <div class="play-button">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-            </a>
-        </div>
-
-        <div class="column">
-            <a href="html/Growa.html" data-game="Grow A Garden">
-                <img src="images/growa.png" alt="Grow A Garden">
-                <div class="play-button">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-            </a>
-            <a href="games/1v1lol" data-game="1v1 LOL">
-                <img src="images/splash.png" alt="1v1 LOL">
-                <div class="play-button">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content">
-        <hr>
-
-        <!-- Search Bar -->
+    <!-- Hero -->
+    <header class="hero">
+        <h2 class="brand-title">Loxnezzz Games</h2>
         <div class="search">
-            <input type="text" id="searchInput" placeholder="Search for games..." autocomplete="off">
-            <button onclick="document.getElementById('searchInput').focus()">
-                <i class="fas fa-search"></i>
-            </button>
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Search games — try “retro bowl” or “slope”" autocomplete="off">
+            <button onclick="document.getElementById('searchInput').focus()">Search</button>
+        </div>
+    </header>
+
+    <!-- Favorites -->
+    <section class="section" id="favoritesSection" style="display:none;">
+        <div class="section-head">
+            <h3><i class="fa-solid fa-heart"></i> My Favorites</h3>
+            <span class="count" id="favCount"></span>
+        </div>
+        <div id="games" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));"><div id="favoritesContainer" style="display:contents;"></div></div>
+    </section>
+
+    <!-- Recently Played -->
+    <section class="section" id="recentSection" style="display:none;">
+        <div class="section-head">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Recently Played</h3>
+        </div>
+        <div id="games" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));"><div id="recentContainer" style="display:contents;"></div></div>
+    </section>
+
+    <!-- Featured / Popular -->
+    <section class="section">
+        <div class="section-head">
+            <h3><i class="fa-solid fa-fire"></i> Popular Right Now</h3>
+            <span class="count">Editor picks</span>
+        </div>
+        <div class="featured-grid">
+            <a href="html/obby.html" class="featured-tile ft-big" data-game="Obby">
+                <img src="images/obby.png" alt="Obby">
+                <div class="ft-play"><i class="fa-solid fa-play"></i></div>
+                <div class="ft-overlay"><div class="ft-meta"><div class="tag">Featured</div><h4>Obby</h4></div></div>
+            </a>
+            <a href="games/MonkeyMart/" class="featured-tile" data-game="Monkey Mart">
+                <img src="images/bg_loading (copy).png" alt="Monkey Mart">
+                <div class="ft-play"><i class="fa-solid fa-play"></i></div>
+                <div class="ft-overlay"><div class="ft-meta"><div class="tag">Arcade</div><h4>Monkey Mart</h4></div></div>
+            </a>
+            <a href="games/basketball-stars" class="featured-tile" data-game="Basketball Stars">
+                <img src="images/basketball.png" alt="Basketball Stars">
+                <div class="ft-play"><i class="fa-solid fa-play"></i></div>
+                <div class="ft-overlay"><div class="ft-meta"><div class="tag">Sports</div><h4>Basketball Stars</h4></div></div>
+            </a>
+            <a href="games/retro-bowl" class="featured-tile" data-game="Retro Bowl">
+                <img src="images/retro-bowl.jpg" alt="Retro Bowl">
+                <div class="ft-play"><i class="fa-solid fa-play"></i></div>
+                <div class="ft-overlay"><div class="ft-meta"><div class="tag">Sports</div><h4>Retro Bowl</h4></div></div>
+            </a>
+            <a href="html/Growa.html" class="featured-tile" data-game="Grow A Garden">
+                <img src="images/growa.png" alt="Grow A Garden">
+                <div class="ft-play"><i class="fa-solid fa-play"></i></div>
+                <div class="ft-overlay"><div class="ft-meta"><div class="tag">Simulation</div><h4>Grow a Garden</h4></div></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- All Games -->
+    <section class="section" id="all-games">
+        <div class="section-head">
+            <h3><i class="fa-solid fa-grip"></i> All Games</h3>
+            <span class="count" id="gameCount"></span>
         </div>
 
-        <!-- Category Filters -->
         <div class="category-filters">
-            <button class="category-btn active" data-category="all">All Games</button>
-            <button class="category-btn" data-category="sports">🏀 Sports</button>
-            <button class="category-btn" data-category="racing">🏎️ Racing</button>
-            <button class="category-btn" data-category="action">⚔️ Action</button>
-            <button class="category-btn" data-category="puzzle">🧩 Puzzle</button>
-            <button class="category-btn" data-category="arcade">🎮 Arcade</button>
-            <button class="category-btn" data-category="simulation">🌍 Simulation</button>
+            <button class="category-btn active" data-category="all"><i class="fa-solid fa-grip"></i> All</button>
+            <button class="category-btn" data-category="sports"><i class="fa-solid fa-basketball"></i> Sports</button>
+            <button class="category-btn" data-category="racing"><i class="fa-solid fa-car-side"></i> Racing</button>
+            <button class="category-btn" data-category="action"><i class="fa-solid fa-crosshairs"></i> Action</button>
+            <button class="category-btn" data-category="puzzle"><i class="fa-solid fa-puzzle-piece"></i> Puzzle</button>
+            <button class="category-btn" data-category="arcade"><i class="fa-solid fa-ghost"></i> Arcade</button>
+            <button class="category-btn" data-category="simulation"><i class="fa-solid fa-earth-americas"></i> Simulation</button>
         </div>
 
-        <!-- No Results Message -->
-        <div class="no-results" id="noResults">
-            No games found. Try a different search term or category!
-        </div>
-
-        <!-- Games Grid -->
         <div id="games">
             <!-- Sports -->
-            <div class="game-card" data-category="sports">
-                <a href="games/basketball-stars" data-game="Basketball Stars">
-                    <span class="category-badge">Sports</span>
-                    <img src="images/basketball.png" alt="Basketball Stars">
-                </a>
-                <button class="favorite-btn" data-game="Basketball Stars">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="sports">
-                <a href="games/retro-bowl/" data-game="Retro Bowl">
-                    <span class="category-badge">Sports</span>
-                    <img src="images/retro-bowl.jpg" alt="Retro Bowl">
-                </a>
-                <button class="favorite-btn" data-game="Retro Bowl">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="sports">
-                <a href="html/retrobowlplus.html" data-game="Retro Bowl Plus">
-                    <span class="category-badge">Sports</span>
-                    <img src="images/retrobowlplus.png" alt="Retro Bowl Plus">
-                </a>
-                <button class="favorite-btn" data-game="Retro Bowl Plus">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
+            <div class="game-card" data-category="sports"><a href="games/basketball-stars" data-game="Basketball Stars"><div class="thumb"><img src="images/basketball.png" alt="Basketball Stars"></div><div class="meta"><div class="cat">Sports</div><div class="name">Basketball Stars</div></div></a><button class="favorite-btn" data-game="Basketball Stars"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="sports"><a href="games/retro-bowl/" data-game="Retro Bowl"><div class="thumb"><img src="images/retro-bowl.jpg" alt="Retro Bowl"></div><div class="meta"><div class="cat">Sports</div><div class="name">Retro Bowl</div></div></a><button class="favorite-btn" data-game="Retro Bowl"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="sports"><a href="html/retrobowlplus.html" data-game="Retro Bowl Plus"><div class="thumb"><img src="images/retrobowlplus.png" alt="Retro Bowl Plus"></div><div class="meta"><div class="cat">Sports</div><div class="name">Retro Bowl Plus</div></div></a><button class="favorite-btn" data-game="Retro Bowl Plus"><i class="fa-regular fa-heart"></i></button></div>
 
             <!-- Racing -->
-            <div class="game-card" data-category="racing">
-                <a href="games/drive-mad/" data-game="Drive Mad">
-                    <span class="category-badge">Racing</span>
-                    <img src="images/drive-mad.jpg" alt="Drive Mad">
-                </a>
-                <button class="favorite-btn" data-game="Drive Mad">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="racing">
-                <a href="games/moto-x3m/" data-game="Moto X3M">
-                    <span class="category-badge">Racing</span>
-                    <img src="images/moto-x3m.jpg" alt="Moto X3M">
-                </a>
-                <button class="favorite-btn" data-game="Moto X3M">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="racing">
-                <a href="games/motox3m2/" data-game="Moto X3M 2">
-                    <span class="category-badge">Racing</span>
-                    <img src="images/motox3m2.jpg" alt="Moto X3M 2">
-                </a>
-                <button class="favorite-btn" data-game="Moto X3M 2">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="racing">
-                <a href="games/drift-hunters" data-game="Drift Hunters">
-                    <span class="category-badge">Racing</span>
-                    <img src="images/drift-hunters.png" alt="Drift Hunters">
-                </a>
-                <button class="favorite-btn" data-game="Drift Hunters">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="racing">
-                <a href="games/Rocket-League" data-game="Rocket League">
-                    <span class="category-badge">Racing</span>
-                    <img src="images/splash2.png" alt="Rocket League">
-                </a>
-                <button class="favorite-btn" data-game="Rocket League">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
+            <div class="game-card" data-category="racing"><a href="games/drive-mad/" data-game="Drive Mad"><div class="thumb"><img src="images/drive-mad.jpg" alt="Drive Mad"></div><div class="meta"><div class="cat">Racing</div><div class="name">Drive Mad</div></div></a><button class="favorite-btn" data-game="Drive Mad"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="racing"><a href="games/moto-x3m/" data-game="Moto X3M"><div class="thumb"><img src="images/moto-x3m.jpg" alt="Moto X3M"></div><div class="meta"><div class="cat">Racing</div><div class="name">Moto X3M</div></div></a><button class="favorite-btn" data-game="Moto X3M"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="racing"><a href="games/motox3m2/" data-game="Moto X3M 2"><div class="thumb"><img src="images/motox3m2.jpg" alt="Moto X3M 2"></div><div class="meta"><div class="cat">Racing</div><div class="name">Moto X3M 2</div></div></a><button class="favorite-btn" data-game="Moto X3M 2"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="racing"><a href="games/drift-hunters" data-game="Drift Hunters"><div class="thumb"><img src="images/drift-hunters.png" alt="Drift Hunters"></div><div class="meta"><div class="cat">Racing</div><div class="name">Drift Hunters</div></div></a><button class="favorite-btn" data-game="Drift Hunters"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="racing"><a href="games/Rocket-League" data-game="Rocket League"><div class="thumb"><img src="images/splash2.png" alt="Rocket League"></div><div class="meta"><div class="cat">Racing</div><div class="name">Rocket League</div></div></a><button class="favorite-btn" data-game="Rocket League"><i class="fa-regular fa-heart"></i></button></div>
 
             <!-- Action -->
-            <div class="game-card" data-category="action">
-                <a href="games/1v1lol" data-game="1v1 LOL">
-                    <span class="category-badge">Action</span>
-                    <img src="images/splash.png" alt="1v1 LOL">
-                </a>
-                <button class="favorite-btn" data-game="1v1 LOL">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="games/slope/" data-game="Slope">
-                    <span class="category-badge">Action</span>
-                    <img src="images/slope.jpg" alt="Slope">
-                </a>
-                <button class="favorite-btn" data-game="Slope">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="games/vex5/" data-game="Vex 5">
-                    <span class="category-badge">Action</span>
-                    <img src="images/vex5.jpeg" alt="Vex 5">
-                </a>
-                <button class="favorite-btn" data-game="Vex 5">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="games/vex6/" data-game="Vex 6">
-                    <span class="category-badge">Action</span>
-                    <img src="images/vex6.jpeg" alt="Vex 6">
-                </a>
-                <button class="favorite-btn" data-game="Vex 6">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="games/vex7/" data-game="Vex 7">
-                    <span class="category-badge">Action</span>
-                    <img src="images/vex7.jpeg" alt="Vex 7">
-                </a>
-                <button class="favorite-btn" data-game="Vex 7">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="html/deadshot.html" data-game="Deadshot">
-                    <span class="category-badge">Action</span>
-                    <img src="images/deadshot-io.png" alt="Deadshot">
-                </a>
-                <button class="favorite-btn" data-game="Deadshot">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="html/archer.html" data-game="Archer">
-                    <span class="category-badge">Action</span>
-                    <img src="images/arrow.png" alt="Archer">
-                </a>
-                <button class="favorite-btn" data-game="Archer">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="games/zombsroyale" data-game="Zombs Royale">
-                    <span class="category-badge">Action</span>
-                    <img src="games/zombsroyale/zombs.png" alt="Zombs Royale">
-                </a>
-                <button class="favorite-btn" data-game="Zombs Royale">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="html/codzombies.html" data-game="COD Zombies">
-                    <span class="category-badge">Action</span>
-                    <img src="images/cod.png" alt="COD Zombies">
-                </a>
-                <button class="favorite-btn" data-game="COD Zombies">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="html/obby.html" data-game="Obby">
-                    <span class="category-badge">Action</span>
-                    <img src="images/obby.png" alt="Obby">
-                </a>
-                <button class="favorite-btn" data-game="Obby">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="html/freddygame.html" data-game="Freddygame">
-                    <span class="category-badge">Action</span>
-                    <img src="images/freddy.jpg" alt="Freddy">
-                </a>
-                <button class="favorite-btn" data-game="Freddy">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="html/obby2.html" data-game="Obby Jetpack">
-                    <span class="category-badge">Action</span>
-                    <img src="images/obby2.jpg" alt="Obby Jetpack">
-                </a>
-                <button class="favorite-btn" data-game="Freddy">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="action">
-                <a href="html/tsunami.html" data-game="Tsunami Brainrot">
-                    <span class="category-badge">Action</span>
-                    <img src="images/tsunami.jpg" alt="Tsunami">
-                </a>
-                <button class="favorite-btn" data-game="Tsunami">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
+            <div class="game-card" data-category="action"><a href="games/1v1lol" data-game="1v1 LOL"><div class="thumb"><img src="images/splash.png" alt="1v1 LOL"></div><div class="meta"><div class="cat">Action</div><div class="name">1v1 LOL</div></div></a><button class="favorite-btn" data-game="1v1 LOL"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="games/slope/" data-game="Slope"><div class="thumb"><img src="images/slope.jpg" alt="Slope"></div><div class="meta"><div class="cat">Action</div><div class="name">Slope</div></div></a><button class="favorite-btn" data-game="Slope"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="games/vex5/" data-game="Vex 5"><div class="thumb"><img src="images/vex5.jpeg" alt="Vex 5"></div><div class="meta"><div class="cat">Action</div><div class="name">Vex 5</div></div></a><button class="favorite-btn" data-game="Vex 5"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="games/vex6/" data-game="Vex 6"><div class="thumb"><img src="images/vex6.jpeg" alt="Vex 6"></div><div class="meta"><div class="cat">Action</div><div class="name">Vex 6</div></div></a><button class="favorite-btn" data-game="Vex 6"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="games/vex7/" data-game="Vex 7"><div class="thumb"><img src="images/vex7.jpeg" alt="Vex 7"></div><div class="meta"><div class="cat">Action</div><div class="name">Vex 7</div></div></a><button class="favorite-btn" data-game="Vex 7"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="html/deadshot.html" data-game="Deadshot"><div class="thumb"><img src="images/deadshot-io.png" alt="Deadshot"></div><div class="meta"><div class="cat">Action</div><div class="name">Deadshot</div></div></a><button class="favorite-btn" data-game="Deadshot"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="html/archer.html" data-game="Archer"><div class="thumb"><img src="images/arrow.png" alt="Archer"></div><div class="meta"><div class="cat">Action</div><div class="name">Archer</div></div></a><button class="favorite-btn" data-game="Archer"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="games/zombsroyale" data-game="Zombs Royale"><div class="thumb"><img src="games/zombsroyale/zombs.png" alt="Zombs Royale"></div><div class="meta"><div class="cat">Action</div><div class="name">Zombs Royale</div></div></a><button class="favorite-btn" data-game="Zombs Royale"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="html/codzombies.html" data-game="COD Zombies"><div class="thumb"><img src="images/cod.png" alt="COD Zombies"></div><div class="meta"><div class="cat">Action</div><div class="name">COD Zombies</div></div></a><button class="favorite-btn" data-game="COD Zombies"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="html/obby.html" data-game="Obby"><div class="thumb"><img src="images/obby.png" alt="Obby"></div><div class="meta"><div class="cat">Action</div><div class="name">Obby</div></div></a><button class="favorite-btn" data-game="Obby"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="html/freddygame.html" data-game="Freddygame"><div class="thumb"><img src="images/freddy.jpg" alt="Freddy"></div><div class="meta"><div class="cat">Action</div><div class="name">Freddy</div></div></a><button class="favorite-btn" data-game="Freddy"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="html/obby2.html" data-game="Obby Jetpack"><div class="thumb"><img src="images/obby2.jpg" alt="Obby Jetpack"></div><div class="meta"><div class="cat">Action</div><div class="name">Obby Jetpack</div></div></a><button class="favorite-btn" data-game="Obby Jetpack"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="action"><a href="html/tsunami.html" data-game="Tsunami Brainrot"><div class="thumb"><img src="images/tsunami.jpg" alt="Tsunami"></div><div class="meta"><div class="cat">Action</div><div class="name">Tsunami</div></div></a><button class="favorite-btn" data-game="Tsunami"><i class="fa-regular fa-heart"></i></button></div>
 
             <!-- Puzzle -->
-            <div class="game-card" data-category="puzzle">
-                <a href="games/2048" data-game="2048">
-                    <span class="category-badge">Puzzle</span>
-                    <img src="images/apple-touch-icon.png" alt="2048">
-                </a>
-                <button class="favorite-btn" data-game="2048">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="puzzle">
-                <a href="games/paperio2" data-game="Paper.io 2">
-                    <span class="category-badge">Puzzle</span>
-                    <img src="images/icon512.png" alt="Paper.io 2">
-                </a>
-                <button class="favorite-btn" data-game="Paper.io 2">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="puzzle">
-                <a href="games/fireboy-and-watergirl" data-game="Fireboy and Watergirl">
-                    <span class="category-badge">Puzzle</span>
-                    <img src="images/waterdate.png" alt="Fireboy and Watergirl">
-                </a>
-                <button class="favorite-btn" data-game="Fireboy and Watergirl">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="puzzle">
-                <a href="games/bob-the-robber-2/" data-game="Bob the Robber 2">
-                    <span class="category-badge">Puzzle</span>
-                    <img src="images/bob-the-robber-2.png" alt="Bob the Robber 2">
-                </a>
-                <button class="favorite-btn" data-game="Bob the Robber 2">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
+            <div class="game-card" data-category="puzzle"><a href="games/2048" data-game="2048"><div class="thumb"><img src="images/apple-touch-icon.png" alt="2048"></div><div class="meta"><div class="cat">Puzzle</div><div class="name">2048</div></div></a><button class="favorite-btn" data-game="2048"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="puzzle"><a href="games/paperio2" data-game="Paper.io 2"><div class="thumb"><img src="images/icon512.png" alt="Paper.io 2"></div><div class="meta"><div class="cat">Puzzle</div><div class="name">Paper.io 2</div></div></a><button class="favorite-btn" data-game="Paper.io 2"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="puzzle"><a href="games/fireboy-and-watergirl" data-game="Fireboy and Watergirl"><div class="thumb"><img src="images/waterdate.png" alt="Fireboy and Watergirl"></div><div class="meta"><div class="cat">Puzzle</div><div class="name">Fireboy &amp; Watergirl</div></div></a><button class="favorite-btn" data-game="Fireboy and Watergirl"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="puzzle"><a href="games/bob-the-robber-2/" data-game="Bob the Robber 2"><div class="thumb"><img src="images/bob-the-robber-2.png" alt="Bob the Robber 2"></div><div class="meta"><div class="cat">Puzzle</div><div class="name">Bob the Robber 2</div></div></a><button class="favorite-btn" data-game="Bob the Robber 2"><i class="fa-regular fa-heart"></i></button></div>
 
             <!-- Arcade -->
-            <div class="game-card" data-category="arcade">
-                <a href="games/MonkeyMart" data-game="Monkey Mart">
-                    <span class="category-badge">Arcade</span>
-                    <img src="images/bg_loading (copy).png" alt="Monkey Mart">
-                </a>
-                <button class="favorite-btn" data-game="Monkey Mart">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="arcade">
-                <a href="games/jetpack-joyride" data-game="Jetpack Joyride">
-                    <span class="category-badge">Arcade</span>
-                    <img src="images/splash3.jpg" alt="Jetpack Joyride">
-                </a>
-                <button class="favorite-btn" data-game="Jetpack Joyride">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="arcade">
-                <a href="games/friday-night-funkin--week-6" data-game="Friday Night Funkin">
-                    <span class="category-badge">Arcade</span>
-                    <img src="images/funkin.png" alt="Friday Night Funkin">
-                </a>
-                <button class="favorite-btn" data-game="Friday Night Funkin">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="arcade">
-                <a href="games/DogeMiner" data-game="Doge Miner">
-                    <span class="category-badge">Arcade</span>
-                    <img src="images/favicon.ico" alt="Doge Miner">
-                </a>
-                <button class="favorite-btn" data-game="Doge Miner">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="arcade">
-                <a href="html/tungtung.html" data-game="Tung Tung">
-                    <span class="category-badge">Arcade</span>
-                    <img src="images/tungtung.png" alt="Tung Tung">
-                </a>
-                <button class="favorite-btn" data-game="Tung Tung">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="arcade">
-                <a href="html/stealbrainrot.html" data-game="Steal a Brainrot">
-                    <span class="category-badge">Arcade</span>
-                    <img src="images/Steala.png" alt="Steal a Brainrot">
-                </a>
-                <button class="favorite-btn" data-game="Steal a Brainrot">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
+            <div class="game-card" data-category="arcade"><a href="games/MonkeyMart" data-game="Monkey Mart"><div class="thumb"><img src="images/bg_loading (copy).png" alt="Monkey Mart"></div><div class="meta"><div class="cat">Arcade</div><div class="name">Monkey Mart</div></div></a><button class="favorite-btn" data-game="Monkey Mart"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="arcade"><a href="games/jetpack-joyride" data-game="Jetpack Joyride"><div class="thumb"><img src="images/splash3.jpg" alt="Jetpack Joyride"></div><div class="meta"><div class="cat">Arcade</div><div class="name">Jetpack Joyride</div></div></a><button class="favorite-btn" data-game="Jetpack Joyride"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="arcade"><a href="games/friday-night-funkin--week-6" data-game="Friday Night Funkin"><div class="thumb"><img src="images/funkin.png" alt="Friday Night Funkin"></div><div class="meta"><div class="cat">Arcade</div><div class="name">Friday Night Funkin</div></div></a><button class="favorite-btn" data-game="Friday Night Funkin"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="arcade"><a href="games/DogeMiner" data-game="Doge Miner"><div class="thumb"><img src="images/favicon.ico" alt="Doge Miner"></div><div class="meta"><div class="cat">Arcade</div><div class="name">Doge Miner</div></div></a><button class="favorite-btn" data-game="Doge Miner"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="arcade"><a href="html/tungtung.html" data-game="Tung Tung"><div class="thumb"><img src="images/tungtung.png" alt="Tung Tung"></div><div class="meta"><div class="cat">Arcade</div><div class="name">Tung Tung</div></div></a><button class="favorite-btn" data-game="Tung Tung"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="arcade"><a href="html/stealbrainrot.html" data-game="Steal a Brainrot"><div class="thumb"><img src="images/Steala.png" alt="Steal a Brainrot"></div><div class="meta"><div class="cat">Arcade</div><div class="name">Steal a Brainrot</div></div></a><button class="favorite-btn" data-game="Steal a Brainrot"><i class="fa-regular fa-heart"></i></button></div>
 
             <!-- Simulation -->
-            <div class="game-card" data-category="simulation">
-                <a href="html/Minecraft.html" data-game="Minecraft">
-                    <span class="category-badge">Simulation</span>
-                    <img src="images/mc.png" alt="Minecraft">
-                </a>
-                <button class="favorite-btn" data-game="Minecraft">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
+            <div class="game-card" data-category="simulation"><a href="html/Minecraft.html" data-game="Minecraft"><div class="thumb"><img src="images/mc.png" alt="Minecraft"></div><div class="meta"><div class="cat">Simulation</div><div class="name">Minecraft</div></div></a><button class="favorite-btn" data-game="Minecraft"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="simulation"><a href="html/Growa.html" data-game="Grow A Garden"><div class="thumb"><img src="images/growa.png" alt="Grow A Garden"></div><div class="meta"><div class="cat">Simulation</div><div class="name">Grow A Garden</div></div></a><button class="favorite-btn" data-game="Grow A Garden"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="simulation"><a href="html/3dfarmgoat.html" data-game="Farm Goat"><div class="thumb"><img src="images/cattle.png" alt="Farm Goat"></div><div class="meta"><div class="cat">Simulation</div><div class="name">Farm Goat</div></div></a><button class="favorite-btn" data-game="Farm Goat"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="simulation"><a href="html/Gta.html" data-game="GTA"><div class="thumb"><img src="images/gta.png" alt="GTA"></div><div class="meta"><div class="cat">Simulation</div><div class="name">GTA</div></div></a><button class="favorite-btn" data-game="GTA"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="simulation"><a href="games/sm64" data-game="Super Mario 64"><div class="thumb"><img src="images/mario.png" alt="Super Mario 64"></div><div class="meta"><div class="cat">Simulation</div><div class="name">Super Mario 64</div></div></a><button class="favorite-btn" data-game="Super Mario 64"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="simulation"><a href="html/MarioGames.html" data-game="Mario Games"><div class="thumb"><img src="images/mariostuff.png" alt="Mario Games"></div><div class="meta"><div class="cat">Simulation</div><div class="name">Mario Games</div></div></a><button class="favorite-btn" data-game="Mario Games"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="simulation"><a href="html/royalcl.html" data-game="Clash Royal"><div class="thumb"><img src="images/clash.png" alt="Clash Royal"></div><div class="meta"><div class="cat">Simulation</div><div class="name">Clash Royal</div></div></a><button class="favorite-btn" data-game="Clash Royal"><i class="fa-regular fa-heart"></i></button></div>
+            <div class="game-card" data-category="simulation"><a href="html/5nightsatepstiene.html" data-game="5nightsatepstiene"><div class="thumb"><img src="images/epstiene.jpg" alt="5nightsatepstiene"></div><div class="meta"><div class="cat">Action</div><div class="name">5 Nights</div></div></a><button class="favorite-btn" data-game="5nightsatepstiene"><i class="fa-regular fa-heart"></i></button></div>
 
-            <div class="game-card" data-category="simulation">
-                <a href="html/Growa.html" data-game="Grow A Garden">
-                    <span class="category-badge">Simulation</span>
-                    <img src="images/growa.png" alt="Grow A Garden">
-                </a>
-                <button class="favorite-btn" data-game="Grow A Garden">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="simulation">
-                <a href="html/3dfarmgoat.html" data-game="Farm Goat">
-                    <span class="category-badge">Simulation</span>
-                    <img src="images/cattle.png" alt="Farm Goat">
-                </a>
-                <button class="favorite-btn" data-game="Farm Goat">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="simulation">
-                <a href="html/Gta.html" data-game="GTA">
-                    <span class="category-badge">Simulation</span>
-                    <img src="images/gta.png" alt="GTA">
-                </a>
-                <button class="favorite-btn" data-game="GTA">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="simulation">
-                <a href="games/sm64" data-game="Super Mario 64">
-                    <span class="category-badge">Simulation</span>
-                    <img src="images/mario.png" alt="Super Mario 64">
-                </a>
-                <button class="favorite-btn" data-game="Super Mario 64">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="simulation">
-                <a href="html/MarioGames.html" data-game="Mario Games">
-                    <span class="category-badge">Simulation</span>
-                    <img src="images/mariostuff.png" alt="Mario Games">
-                </a>
-                <button class="favorite-btn" data-game="Mario Games">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-
-            <div class="game-card" data-category="simulation">
-                <a href="html/royalcl.html" data-game="Clash Royal">
-                    <span class="category-badge">Simulation</span>
-                    <img src="images/clash.png" alt="Clash Royal">
-                </a>
-                <button class="favorite-btn" data-game="Clash Royal">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
-            
-            <div class="game-card" data-category="simulation">
-                <a href="html/5nightsatepstiene.html" data-game="5nightsatepstiene">
-                    <span class="category-badge">Action</span>
-                    <img src="images/epstiene.jpg" alt="5nightsatepstiene">
-                </a>
-                <button class="favorite-btn" data-game="Obby">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </div>
+            <div class="no-results" id="noResults">No games found. Try a different search term or category.</div>
         </div>
-    </div>
+    </section>
 
-    <!-- JavaScript -->
+    <footer>
+        Loxnezzz Games <span>·</span> Built for play <span>·</span> <a href="tools.html" style="color:var(--brand);">Tools &amp; Settings</a>
+    </footer>
+
     <script>
-        // Storage keys
-        const FAVORITES_KEY = 'loxnezzz_favorites';
-        const RECENT_KEY = 'loxnezzz_recent';
+        const FAV_KEY = 'loxnezzz_favorites';
+        const REC_KEY = 'loxnezzz_recent';
 
-        // Get data from memory
-        let favorites = [];
-        let recentlyPlayed = [];
+        const load = k => { try { return JSON.parse(localStorage.getItem(k)) || []; } catch { return []; } };
+        const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
 
-        // Load favorites and recent from memory on page load
-        function loadData() {
-            favorites = [];
-            recentlyPlayed = [];
-            updateFavoritesSection();
-            updateRecentSection();
+        let favorites = load(FAV_KEY);
+        let recent = load(REC_KEY);
+
+        const $ = s => document.querySelector(s);
+        const $$ = s => document.querySelectorAll(s);
+
+        function findCard(name) {
+            return document.querySelector(`#all-games .game-card a[data-game="${name}"]`)?.closest('.game-card');
         }
 
-        // Update favorites section
-        function updateFavoritesSection() {
-            const favSection = document.getElementById('favoritesSection');
-            const favContainer = document.getElementById('favoritesContainer');
-            
-            if (favorites.length === 0) {
-                favSection.style.display = 'none';
-                return;
-            }
-            
-            favSection.style.display = 'block';
-            favContainer.innerHTML = '';
-            
-            favorites.forEach(gameName => {
-                const gameCard = findGameCard(gameName);
-                if (gameCard) {
-                    const clone = createMiniGameCard(gameCard, gameName);
-                    favContainer.appendChild(clone);
-                }
+        function renderList(containerId, names, emptyMsg) {
+            const section = containerId === 'favoritesContainer' ? $('#favoritesSection') : $('#recentSection');
+            const container = document.getElementById(containerId);
+            if (!names.length) { section.style.display = 'none'; return; }
+            section.style.display = 'block';
+            container.innerHTML = '';
+            names.forEach(name => {
+                const src = findCard(name);
+                if (!src) return;
+                const clone = src.cloneNode(true);
+                const btn = clone.querySelector('.favorite-btn');
+                if (favorites.includes(name)) { btn.classList.add('active'); btn.querySelector('i').className = 'fa-solid fa-heart'; }
+                btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); toggleFav(name); });
+                clone.querySelector('a[data-game]')?.addEventListener('click', () => addRecent(name));
+                container.appendChild(clone);
+            });
+            if (containerId === 'favoritesContainer') $('#favCount').textContent = `${names.length} saved`;
+        }
+
+        function syncFavButtons(name) {
+            $$(`.favorite-btn[data-game="${name}"]`).forEach(btn => {
+                const on = favorites.includes(name);
+                btn.classList.toggle('active', on);
+                btn.querySelector('i').className = on ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
             });
         }
 
-        // Update recently played section
-        function updateRecentSection() {
-            const recentSection = document.getElementById('recentSection');
-            const recentContainer = document.getElementById('recentContainer');
-            
-            if (recentlyPlayed.length === 0) {
-                recentSection.style.display = 'none';
-                return;
-            }
-            
-            recentSection.style.display = 'block';
-            recentContainer.innerHTML = '';
-            
-            recentlyPlayed.forEach(gameName => {
-                const gameCard = findGameCard(gameName);
-                if (gameCard) {
-                    const clone = createMiniGameCard(gameCard, gameName);
-                    recentContainer.appendChild(clone);
-                }
-            });
+        function toggleFav(name) {
+            favorites = favorites.includes(name) ? favorites.filter(n => n !== name) : [...favorites, name];
+            save(FAV_KEY, favorites);
+            syncFavButtons(name);
+            renderList('favoritesContainer', favorites);
         }
 
-        // Find game card by name
-        function findGameCard(gameName) {
-            return document.querySelector(`.game-card a[data-game="${gameName}"]`)?.closest('.game-card');
+        function addRecent(name) {
+            recent = [name, ...recent.filter(n => n !== name)].slice(0, 8);
+            save(REC_KEY, recent);
+            renderList('recentContainer', recent);
         }
 
-        // Create mini game card for favorites/recent
-        function createMiniGameCard(gameCard, gameName) {
-            const clone = gameCard.cloneNode(true);
-            const favoriteBtn = clone.querySelector('.favorite-btn');
-            
-            // Update favorite button state
-            if (favorites.includes(gameName)) {
-                favoriteBtn.classList.add('active');
-                favoriteBtn.querySelector('i').className = 'fa-solid fa-heart';
-            }
-            
-            // Re-attach event listener
-            favoriteBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleFavorite(gameName, favoriteBtn);
-            });
-            
-            return clone;
-        }
-
-        // Toggle favorite
-        function toggleFavorite(gameName, btn) {
-            if (favorites.includes(gameName)) {
-                favorites = favorites.filter(name => name !== gameName);
-                btn.classList.remove('active');
-                btn.querySelector('i').className = 'fa-regular fa-heart';
-            } else {
-                favorites.push(gameName);
-                btn.classList.add('active');
-                btn.querySelector('i').className = 'fa-solid fa-heart';
-            }
-            
-            updateAllFavoriteButtons(gameName);
-            updateFavoritesSection();
-        }
-
-        // Update all favorite buttons for a game
-        function updateAllFavoriteButtons(gameName) {
-            document.querySelectorAll(`.favorite-btn[data-game="${gameName}"]`).forEach(btn => {
-                if (favorites.includes(gameName)) {
-                    btn.classList.add('active');
-                    btn.querySelector('i').className = 'fa-solid fa-heart';
-                } else {
-                    btn.classList.remove('active');
-                    btn.querySelector('i').className = 'fa-regular fa-heart';
-                }
-            });
-        }
-
-        // Track recently played
-        function addToRecent(gameName) {
-            recentlyPlayed = recentlyPlayed.filter(name => name !== gameName);
-            recentlyPlayed.unshift(gameName);
-            if (recentlyPlayed.length > 8) {
-                recentlyPlayed = recentlyPlayed.slice(0, 8);
-            }
-            updateRecentSection();
-        }
-
-        // Initialize favorite buttons
-        document.querySelectorAll('.favorite-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const gameName = btn.getAttribute('data-game');
-                toggleFavorite(gameName, btn);
-            });
+        // Init favorite buttons & recent tracking
+        $$('.favorite-btn').forEach(btn => {
+            const name = btn.getAttribute('data-game');
+            if (favorites.includes(name)) { btn.classList.add('active'); btn.querySelector('i').className = 'fa-solid fa-heart'; }
+            btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); toggleFav(name); });
         });
+        $$('a[data-game]').forEach(a => a.addEventListener('click', () => addRecent(a.getAttribute('data-game'))));
 
-        // Track game clicks for recently played
-        document.querySelectorAll('a[data-game]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                const gameName = link.getAttribute('data-game');
-                addToRecent(gameName);
+        // Category + search
+        const catBtns = $$('.category-btn');
+        const cards = $$('#all-games .game-card');
+        const input = $('#searchInput');
+        const noRes = $('#noResults');
+        let activeCat = 'all';
+
+        catBtns.forEach(btn => btn.addEventListener('click', () => {
+            catBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeCat = btn.dataset.category;
+            filter();
+        }));
+        input.addEventListener('input', filter);
+        input.addEventListener('keydown', e => { if (e.key === 'Escape') { input.value = ''; filter(); } });
+
+        function filter() {
+            const q = input.value.toLowerCase().trim();
+            let visible = 0;
+            cards.forEach(c => {
+                const cat = c.dataset.category;
+                const name = c.querySelector('img').alt.toLowerCase();
+                const match = (activeCat === 'all' || cat === activeCat) && name.includes(q);
+                c.style.display = match ? '' : 'none';
+                if (match) visible++;
             });
-        });
-
-        // Category filtering
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        const gameCards = document.querySelectorAll('#games .game-card');
-        const searchInput = document.getElementById('searchInput');
-        const noResults = document.getElementById('noResults');
-
-        let activeCategory = 'all';
-
-        categoryButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                categoryButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                activeCategory = btn.getAttribute('data-category');
-                filterGames();
-            });
-        });
-
-        // Search functionality
-        searchInput.addEventListener('input', filterGames);
-
-        function filterGames() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            let visibleCount = 0;
-
-            gameCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                const img = card.querySelector('img');
-                const gameName = img.alt.toLowerCase();
-                
-                const matchesCategory = activeCategory === 'all' || category === activeCategory;
-                const matchesSearch = gameName.includes(searchTerm);
-                
-                if (matchesCategory && matchesSearch) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+            noRes.style.display = visible === 0 ? 'block' : 'none';
+            $('#gameCount').textContent = `${visible} game${visible === 1 ? '' : 's'}`;
         }
 
-        // Clear search on Escape
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                searchInput.value = '';
-                filterGames();
-            }
-        });
-
-        // Load data on page load
-        loadData();
-    </script>
-</body>
-</html>
+        renderList('favoritesContainer', favorites);
+        renderList('recentContainer', recent);
+        filter();
