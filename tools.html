@@ -1,35 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools — Loxnezzz Games</title>
+    <meta name="description" content="Tools, settings, requests and extras for Loxnezzz Games.">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap">
+    <style>
+        :root {
+            --bg: #03060d;
+            --panel: #0b1626;
+            --panel-2: #0f1d33;
+            --border: rgba(0, 225, 255, 0.12);
+            --border-strong: rgba(0, 225, 255, 0.35);
+            --text: #e8f6ff;
+            --muted: #7d8ea3;
+            --brand: #00e1ff;
+            --brand-2: #2b6bff;
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+        a { color: inherit; text-decoration: none; }
 
-
-
-<style>
-  body{background-color: black;}
-  h1{color: black;}
-
-  a:link {
-  color: white;
-  background-color: transparent;
-  text-decoration: none;
-  font-size: 60px;
-  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-   a:visited {
-            color: white;
+        body::before {
+            content: ''; position: fixed; inset: 0; z-index: -2;
+            background:
+                radial-gradient(900px 600px at 12% -10%, rgba(43,107,255,0.18), transparent 60%),
+                radial-gradient(800px 500px at 95% 0%, rgba(0,225,255,0.12), transparent 60%),
+                linear-gradient(180deg, #03060d 0%, #02040a 100%);
+        }
+        body::after {
+            content: ''; position: fixed; inset: 0; z-index: -1; opacity: 0.4;
+            background-image:
+                linear-gradient(rgba(0,225,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,225,255,0.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
         }
 
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 68px; padding: 0 28px;
+            background: rgba(3,6,13,0.75);
+            backdrop-filter: blur(18px) saturate(160%);
+            border-bottom: 1px solid var(--border);
+        }
+        nav .logo-section { display: flex; align-items: center; gap: 12px; }
+        nav .logo-mark {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+            display: grid; place-items: center; color: #001018;
+            font-size: 1.1rem; box-shadow: 0 0 24px rgba(0,225,255,0.35);
+        }
+        nav h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; letter-spacing: 0.5px; }
+        nav h1 span { color: var(--brand); }
+        .nav-icon-btn {
+            width: 42px; height: 42px; border-radius: 12px;
+            display: grid; place-items: center;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.02);
+            color: var(--text); cursor: pointer;
+            transition: all .2s ease;
+        }
+        .nav-icon-btn:hover { border-color: var(--border-strong); color: var(--brand); background: rgba(0,225,255,0.08); transform: translateY(-2px); }
 
-  a:hover {
-  color: red;
-  background-color: transparent;
-  text-decoration: underline;
-}
-  
-  
-</style>
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 48px 28px 80px; }
 
- 
-<a href="Newgames.html" class="Newgames">Request New Games Form</a></p>
-<a href="html/Chat.html" class="Chat">Chat</a></p>
-<a href="html/Cloak.html" class="Cloak">Cloak</a></p>
-<a href="index.html" class="menu">Menu</a></p>
+        .page-head { margin-bottom: 36px; }
+        .page-head .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 12px; border-radius: 999px;
+            background: rgba(0,225,255,0.08);
+            border: 1px solid var(--border-strong);
+            color: var(--brand); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .page-head h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.05;
+            background: linear-gradient(180deg, #ffffff 0%, #8fb4d8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .page-head p { color: var(--muted); margin-top: 10px; max-width: 600px; }
 
-<title> Click on of these links for what you need </title>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .tool-card {
+            position: relative; display: flex; flex-direction: column;
+            padding: 22px; min-height: 170px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+            overflow: hidden;
+        }
+        .tool-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(0,225,255,0.08), transparent 60%);
+            opacity: 0; transition: opacity .25s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-strong);
+            box-shadow: 0 14px 32px -16px rgba(0,225,255,0.4);
+        }
+        .tool-card:hover::before { opacity: 1; }
+
+        .tool-card .icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0,225,255,0.15), rgba(43,107,255,0.15));
+            border: 1px solid var(--border-strong);
+            display: grid; place-items: center;
+            color: var(--brand); font-size: 1.2rem;
+            margin-bottom: 14px;
+            position: relative; z-index: 1;
+        }
+        .tool-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem; font-weight: 700;
+            margin-bottom: 6px; position: relative; z-index: 1;
+        }
+        .tool-card p {
+            color: var(--muted); font-size: 0.9rem; line-height: 1.5;
+            position: relative; z-index: 1;
+        }
+        .tool-card .arrow {
+            margin-top: auto; padding-top: 14px;
+            color: var(--brand); font-size: 0.85rem; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 6px;
+            position: relative; z-index: 1;
+            transition: transform .25s ease;
+        }
+        .tool-card:hover .arrow { transform: translateX(4px); }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center; color: var(--muted); font-size: 0.85rem;
+        }
+        footer span { color: var(--brand); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-section">
+            <div class="logo-mark"><i class="fa-solid fa-gamepad"></i></div>
+            <h1>Loxnezzz<span>.</span></h1>
+        </div>
+        <a href="/home.html" class="nav-icon-btn" aria-label="Home" title="Home"><i class="fa-solid fa-house"></i></a>
+    </nav>
+
+    <main class="wrap">
+        <div class="page-head">
+            <span class="eyebrow"><i class="fa-solid fa-toolbox"></i> Tools &amp; Extras</span>
+            <h2>Everything beyond the play button.</h2>
+            <p>Request new games, chat with the community, cloak the tab, or jump back to the menu.</p>
+        </div>
+
+        <div class="grid">
+            <a href="Newgames.html" class="tool-card">
+                <div class="icon"><i class="fa-solid fa-plus"></i></div>
+                <h3>Request a Game</h3>
+                <p>Can't find what you're looking for? Submit a game suggestion and we'll try to add it.</p>
+                <span class="arrow">Open form <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+            <a href="html/Chat.html" class="tool-card">
+                <div class="icon"><i class="fa-solid fa-comments"></i></div>
+                <h3>Chat</h3>
+                <p>Talk to other players, share tips, and find people to play with in real time.</p>
+                <span class="arrow">Join chat <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+            <a href="html/Cloak.html" class="tool-card">
+                <div class="icon"><i class="fa-solid fa-user-secret"></i></div>
+                <h3>Tab Cloak</h3>
+                <p>Disguise the tab title and icon so the site blends in with your other work.</p>
+                <span class="arrow">Customize <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+            <a href="/home.html" class="tool-card">
+                <div class="icon"><i class="fa-solid fa-house"></i></div>
+                <h3>Back to Menu</h3>
+                <p>Return to the main game library and pick something new to play.</p>
+                <span class="arrow">Go home <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        Loxnezzz Games <span>·</span> Tools <span>·</span> <a href="/home.html" style="color:var(--brand);">Back to games</a>
+    </footer>
+</body>
+</html>
